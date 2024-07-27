@@ -1,8 +1,31 @@
-.block {
-    width: 400px;
-    margin: 15px;
-    color: white;
-}
+
 body {
     background: #282c34;
+    color: white;
+}
+
+.card {
+    width: 400px;
+    margin: 15px;
+
+}
+
+.card * {
+    margin: 0;
+}
+
+.AppLogo {
+    width: 70px;
+    height: 70px;
+}
+
+.AppHeader {
+    display: flex;
+    align-items: center;
+}
+
+.borderBox {
+    padding: 20px;
+    border: white 1px solid;
+
 }

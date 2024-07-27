@@ -1,31 +1,31 @@
 import logo from './logo.svg';
-//import './App.css';
 import './first.css';
 
 
-function Card() {
+function Card({h2style, pstyle}) {
     return (
-        <div className="">
+        <div className="card">
             {/*<title>Props</title>*/}
-            <h2>
+            <h2 className={h2style}>
                 React
             </h2>
-            <p>React components use props to communicate with each other. Every parent component can pass some
+            <p className={pstyle}>React components use props to communicate with each other. Every parent component can pass some
                 information
                 to its child components by giving them props. Props might remind you of HTML attributes, but you can
                 pass any
                 JavaScript value through them, including objects, arrays, and functions.
-                You will learn</p>
+            </p>
         </div>
     );
 }
 function App() {
     return (
-        <div className="block">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
+        <div >
+            <header className="AppHeader">
+                <img src={logo} className="AppLogo" alt="logo"/>
+                <h1>Some very informative title</h1>
             </header>
-            <Card/>
+            <Card h2style={"borderBox"} pstyle={"borderBox"}/>
         </div>
     );
 }
