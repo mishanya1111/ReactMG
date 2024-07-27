@@ -1,15 +1,20 @@
 import logo from './logo.svg';
 import './first.css';
+import { useState } from "react";
 
 
-function Card({h2style, pstyle}) {
+function Card({baseStyle,alternativeStyle}) {
+    const [style, setStyle] = new useState(baseStyle);
+    function changeStyle() {
+        setStyle((oldStyle) => oldStyle === baseStyle ? alternativeStyle : baseStyle );
+    }
     return (
         <div className="card">
-            {/*<title>Props</title>*/}
-            <h2 className={h2style}>
+            <h2 className={style}>
                 React
+                <input type="checkbox" onChange={changeStyle}/>
             </h2>
-            <p className={pstyle}>React components use props to communicate with each other. Every parent component can pass some
+            <p className={style}>React components use props to communicate with each other. Every parent component can pass some
                 information
                 to its child components by giving them props. Props might remind you of HTML attributes, but you can
                 pass any
@@ -25,7 +30,7 @@ function App() {
                 <img src={logo} className="AppLogo" alt="logo"/>
                 <h1>Some very informative title</h1>
             </header>
-            <Card h2style={"borderBox"} pstyle={"borderBox"}/>
+            <Card baseStyle="borderBox" alternativeStyle="yellowBox" />
         </div>
     );
 }

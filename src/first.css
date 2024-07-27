@@ -7,11 +7,14 @@ body {
 .card {
     width: 400px;
     margin: 15px;
-
 }
 
 .card * {
     margin: 0;
+}
+.card h2{
+    display: flex;
+    justify-content: space-between;
 }
 
 .AppLogo {
@@ -27,5 +30,8 @@ body {
 .borderBox {
     padding: 20px;
     border: white 1px solid;
-
+}
+.yellowBox{
+    padding: 20px;
+    border: yellow 1px solid;
 }
