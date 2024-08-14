@@ -5,18 +5,16 @@ import {FaSave} from "react-icons/fa";
 import {AiOutlineEdit} from "react-icons/ai";
 
 function Card({baseStyle, alternativeStyle, firstTitle, firstText}) {
-    const [checkState_, setCheckState] = new useState(false);
-    const [editing, setEditing] = new useState(false);
-    const [title, setTitle] = new useState(firstTitle);
-    const [text, setText] = new useState(firstText);
+    const [checked, setChecked] = useState(false);
+    const [editing, setEditing] = useState(false);
+    const [title, setTitle] = useState(firstTitle);
+    const [text, setText] = useState(firstText);
     const checkboxRef = useRef(null);
-    const [saveInf, editSaveInf] = useState({
-        title: title,
-        text: text
-    })
+    const [saveText, setSaveText] = useState(firstText);
+    const [saveTitle, setSaveTitle] = useState(firstText);
 
     function changeCheckbox() {
-        setCheckState((check) => !check);
+        setChecked((check) => !check);
     }
 
     function changeEditing() {
@@ -32,34 +30,73 @@ function Card({baseStyle, alternativeStyle, firstTitle, firstText}) {
     }
 
     function setSaveInf() {
-        editSaveInf({
-            ...saveInf,
-            title: title,
-            text: text,
-        })
+        setSaveTitle(title);
+        setSaveText(text);
     }
 
+    function submitHandler() {
+        changeEditing();
+    }
     function cancelButton() {
-        setTitle(saveInf.title);
-        setText(saveInf.text);
+        setTitle(saveTitle);
+        setText(saveText);
         changeEditing();
     }
 
     function editingHandler() {
-
-        if (!editing) {
-            setSaveInf();
-            if (checkState_) {
-                setCheckState();
-            }
-        } else {
+        setSaveInf();
+        if (checked) {
+            setChecked();
         }
         changeEditing();
     }
 
+    function  RenderDefaulContent() {
+        return (
+            <div className="card">
+                <div className={checked ? alternativeStyle : baseStyle} id='divTitle'>
+                    <h2>
+                        {title}
+                    </h2>
+                    <input type="checkbox" ref={checkboxRef} className="check1" onChange={changeCheckbox}/>
+                    <button
+                        onClick={editingHandler}
+                        className="editButton">
+                        Edit<AiOutlineEdit/>
+                    </button>
+                </div>
+                <div className={checked ? alternativeStyle : baseStyle}>{text}</div>
+            </div>
+        )
+    }
+
+    function RenderEditContent() {
+        return (
+            <div className="card">
+                <div className={checked ? alternativeStyle : baseStyle} id='divTitle'>
+                    <h2>
+                        <input type='text' onChange={titleChangeHandler} value={title} style={{width: 110}}/>
+                    </h2>
+                    <button
+                        onClick={cancelButton}
+                        className="cancelButton">Cancel <MdOutlineCancel/>
+                    </button>
+                    <button
+                        onClick={submitHandler}
+                        className="editButton">
+                        Save<FaSave/>
+                    </button>
+                </div>
+                <div className={checked ? alternativeStyle : baseStyle}>
+                    <textarea onChange={textChangeHandler} className="textAreaBox" value={text}/>
+                </div>
+            </div>
+        )
+    }
     return (
-        <div className="card">
-            <div className={checkState_ ? alternativeStyle : baseStyle} id='divTitle'>
+        editing ? <RenderEditContent /> : <RenderDefaulContent />
+        /*<div className="card">
+            <div className={checked ? alternativeStyle : baseStyle} id='divTitle'>
                 <h2
                     style={{width: 50}}>
                     {editing ?
@@ -70,17 +107,26 @@ function Card({baseStyle, alternativeStyle, firstTitle, firstText}) {
                     onClick={cancelButton}
                     className="cancelButton">Cancel <MdOutlineCancel/>
                 </button> : <input type="checkbox" ref={checkboxRef} className="check1" onChange={changeCheckbox}/>}
-                <button
+                {editing ? <button
+                    onClick={submitHandler}
+                    className="editButton">
+                    Save<FaSave/>
+                </button> : <button
                     onClick={editingHandler}
-                    className="editButton">{editing ? <>Save<FaSave/></> : <>Edit<AiOutlineEdit/> </>}
-                </button>
+                    className="editButton">
+                    Edit<AiOutlineEdit/>
+                </button>}
+
+
             </div>
-            <p className={checkState_ ? alternativeStyle : baseStyle}>
+            <div className={checked ? alternativeStyle : baseStyle}>
                 {editing ?
                     <textarea onChange={textChangeHandler} className="textAreaBox" value={text}/>
                     : text}
-            </p>
-        </div>);
+            </div>
+        </div>
+*/
+    )
 }
 
 
