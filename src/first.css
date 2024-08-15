@@ -12,11 +12,11 @@ body {
 .card * {
     margin: 0;
 }
-.card h2{
+
+#divTitle{
     display: flex;
     justify-content: space-between;
 }
-
 .AppLogo {
     width: 70px;
     height: 70px;
@@ -35,3 +35,15 @@ body {
     padding: 20px;
     border: yellow 1px solid;
 }
+
+.editButton{
+    width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.textAreaBox{
+    width: 350px;
+    height: 140px;
+}
+
