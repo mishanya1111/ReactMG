@@ -11,7 +11,7 @@ function Card({baseStyle, alternativeStyle, firstTitle, firstText}) {
     const [text, setText] = useState(firstText);
     const checkboxRef = useRef(null);
     const [saveText, setSaveText] = useState(firstText);
-    const [saveTitle, setSaveTitle] = useState(firstText);
+    const [saveTitle, setSaveTitle] = useState(firstTitle);
 
     function changeCheckbox() {
         setChecked((check) => !check);
@@ -35,20 +35,18 @@ function Card({baseStyle, alternativeStyle, firstTitle, firstText}) {
     }
 
     function submitHandler() {
-        changeEditing();
+        setEditing(false);
     }
     function cancelButton() {
         setTitle(saveTitle);
         setText(saveText);
-        changeEditing();
+        setEditing(false);
     }
 
     function editingHandler() {
         setSaveInf();
-        if (checked) {
-            setChecked();
-        }
-        changeEditing();
+        setChecked(false);
+        setEditing(true);
     }
 
     function  RenderDefaulContent() {
