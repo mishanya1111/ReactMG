@@ -17,10 +17,6 @@ function Card({baseStyle, alternativeStyle, firstTitle, firstText}) {
         setChecked((check) => !check);
     }
 
-    function changeEditing() {
-        setEditing((edit) => !edit);
-    }
-
     function titleChangeHandler(event) {
         setTitle(event.target.value);
     }
@@ -49,27 +45,8 @@ function Card({baseStyle, alternativeStyle, firstTitle, firstText}) {
         setEditing(true);
     }
 
-    function  RenderDefaulContent() {
-        return (
-            <div className="card">
-                <div className={checked ? alternativeStyle : baseStyle} id='divTitle'>
-                    <h2>
-                        {title}
-                    </h2>
-                    <input type="checkbox" ref={checkboxRef} className="check1" onChange={changeCheckbox}/>
-                    <button
-                        onClick={editingHandler}
-                        className="editButton">
-                        Edit<AiOutlineEdit/>
-                    </button>
-                </div>
-                <div className={checked ? alternativeStyle : baseStyle}>{text}</div>
-            </div>
-        )
-    }
-
-    function RenderEditContent() {
-        return (
+    return (
+        editing ? (
             <div className="card">
                 <div className={checked ? alternativeStyle : baseStyle} id='divTitle'>
                     <h2>
@@ -89,41 +66,21 @@ function Card({baseStyle, alternativeStyle, firstTitle, firstText}) {
                     <textarea onChange={textChangeHandler} className="textAreaBox" value={text}/>
                 </div>
             </div>
-        )
-    }
-    return (
-        editing ? <RenderEditContent /> : <RenderDefaulContent />
-        /*<div className="card">
+        ) : (
+            <div className="card">
             <div className={checked ? alternativeStyle : baseStyle} id='divTitle'>
-                <h2
-                    style={{width: 50}}>
-                    {editing ?
-                        <input type='text' onChange={titleChangeHandler} value={title} style={{width: 110}}/>
-                        : title}
+                <h2>
+                    {title}
                 </h2>
-                {editing ? <button
-                    onClick={cancelButton}
-                    className="cancelButton">Cancel <MdOutlineCancel/>
-                </button> : <input type="checkbox" ref={checkboxRef} className="check1" onChange={changeCheckbox}/>}
-                {editing ? <button
-                    onClick={submitHandler}
-                    className="editButton">
-                    Save<FaSave/>
-                </button> : <button
+                <input type="checkbox" ref={checkboxRef} className="check1" onChange={changeCheckbox}/>
+                <button
                     onClick={editingHandler}
                     className="editButton">
                     Edit<AiOutlineEdit/>
-                </button>}
-
-
+                </button>
             </div>
-            <div className={checked ? alternativeStyle : baseStyle}>
-                {editing ?
-                    <textarea onChange={textChangeHandler} className="textAreaBox" value={text}/>
-                    : text}
-            </div>
-        </div>
-*/
+            <div className={checked ? alternativeStyle : baseStyle}>{text}</div>
+        </div>)
     )
 }
 
