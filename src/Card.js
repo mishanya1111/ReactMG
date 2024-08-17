@@ -4,7 +4,7 @@ import {MdOutlineCancel} from "react-icons/md";
 import {FaSave} from "react-icons/fa";
 import {AiOutlineEdit} from "react-icons/ai";
 
-function Card({baseStyle, alternativeStyle, firstTitle, firstText}) {
+function Card({baseStyle, alternativeStyle, firstTitle, firstText,checkViewOnly}) {
     const [checked, setChecked] = useState(false);
     const [editing, setEditing] = useState(false);
     const [title, setTitle] = useState(firstTitle);
@@ -48,6 +48,7 @@ function Card({baseStyle, alternativeStyle, firstTitle, firstText}) {
     return (
         editing ? (
             <div className="card">
+                {checkViewOnly && cancelButton()}
                 <div className={checked ? alternativeStyle : baseStyle} id='divTitle'>
                     <h2>
                         <input type='text' onChange={titleChangeHandler} value={title} style={{width: 110}}/>
