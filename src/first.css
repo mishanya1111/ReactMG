@@ -43,6 +43,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    height: 32px;
 }
 
 .textAreaBox {
@@ -53,7 +54,7 @@ body {
 .cardContainer {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     gap: 20px;
 }
 

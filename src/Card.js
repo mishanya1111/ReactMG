@@ -1,10 +1,10 @@
 import './first.css';
-import {useState, useRef} from "react";
+import {useState, useRef, useEffect} from "react";
 import {MdOutlineCancel} from "react-icons/md";
 import {FaSave} from "react-icons/fa";
 import {AiOutlineEdit} from "react-icons/ai";
 
-function Card({baseStyle, alternativeStyle, firstTitle, firstText, checkViewOnly}) {
+function Card({firstTitle, firstText, viewOnlyChecked}) {
     const [checked, setChecked] = useState(false);
     const [editing, setEditing] = useState(false);
     const [title, setTitle] = useState(firstTitle);
@@ -12,6 +12,12 @@ function Card({baseStyle, alternativeStyle, firstTitle, firstText, checkViewOnly
     const checkboxRef = useRef(null);
     const [saveText, setSaveText] = useState(firstText);
     const [saveTitle, setSaveTitle] = useState(firstTitle);
+    const baseStyle="borderBox";
+    const alternativeStyle= "yellowBox";
+
+    useEffect(() => {
+        console.log(`Checked state changed to: ${checked}`);
+    }, [checked]);
 
     function changeCheckbox() {
         setChecked((check) => !check);
@@ -49,7 +55,7 @@ function Card({baseStyle, alternativeStyle, firstTitle, firstText, checkViewOnly
     return (
         editing ? (
             <div className="card">
-                {checkViewOnly && cancelButton()}
+                {viewOnlyChecked && cancelButton()}
                 <div className={checked ? alternativeStyle : baseStyle} id='divTitle'>
                     <h2>
                         <input type='text' onChange={titleChangeHandler} value={title} style={{width: 110}}/>
@@ -75,11 +81,11 @@ function Card({baseStyle, alternativeStyle, firstTitle, firstText, checkViewOnly
                         {title}
                     </h2>
                     <input type="checkbox" ref={checkboxRef} className="check1" onChange={changeCheckbox}/>
-                    {checkViewOnly ? "" : <button
+                    <div style={{width:80}}>{viewOnlyChecked ? "" : <button
                         onClick={editingHandler}
                         className="editButton">
                         Edit<AiOutlineEdit/>
-                    </button>}
+                    </button>}</div>
                 </div>
                 <div className={checked ? alternativeStyle + ' textDiv': baseStyle + ' textDiv'} >{text}</div>
             </div>)
