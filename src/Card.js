@@ -16,8 +16,8 @@ function Card({firstTitle, firstText, viewOnlyChecked}) {
     const alternativeStyle= "yellowBox";
 
     useEffect(() => {
-        console.log(`Checked state changed to: ${checked}`);
-    }, [checked]);
+        cancelButton();
+    }, [viewOnlyChecked]);
 
     function changeCheckbox() {
         setChecked((check) => !check);
@@ -55,7 +55,6 @@ function Card({firstTitle, firstText, viewOnlyChecked}) {
     return (
         editing ? (
             <div className="card">
-                {viewOnlyChecked && cancelButton()}
                 <div className={checked ? alternativeStyle : baseStyle} id='divTitle'>
                     <h2>
                         <input type='text' onChange={titleChangeHandler} value={title} style={{width: 110}}/>
