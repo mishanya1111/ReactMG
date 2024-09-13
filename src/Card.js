@@ -1,5 +1,6 @@
 import './first.css';
-import {useState, useRef, useEffect} from "react";
+import {useState, useEffect} from "react";
+import CardHeader from "./CardsComponent/CardHeader";
 import {MdOutlineCancel} from "react-icons/md";
 import {FaSave} from "react-icons/fa";
 import {AiOutlineEdit} from "react-icons/ai";
@@ -9,11 +10,11 @@ function Card({firstTitle, firstText, viewOnlyChecked}) {
     const [editing, setEditing] = useState(false);
     const [title, setTitle] = useState(firstTitle);
     const [text, setText] = useState(firstText);
-    const checkboxRef = useRef(null);
     const [saveText, setSaveText] = useState(firstText);
     const [saveTitle, setSaveTitle] = useState(firstTitle);
     const baseStyle="borderBox";
     const alternativeStyle= "yellowBox";
+    const [canselTemp, setCanselTemp] = useState(firstTitle);
 
     useEffect(() => {
         cancelButton();
@@ -53,7 +54,11 @@ function Card({firstTitle, firstText, viewOnlyChecked}) {
     }
 
     return (
-        editing ? (
+        <div className="card">
+            <CardHeader editing={editing} checked={checked} viewOnlyChecked={viewOnlyChecked} alternativeStyle={alternativeStyle} baseStyle={baseStyle} firstTitle={firstTitle} setCanselTemp={setCanselTemp} setEditing={setEditing} setChecked={setChecked}></CardHeader>
+        </div>
+    )
+        /*editing ? (
             <div className="card">
                 <div className={checked ? alternativeStyle : baseStyle} id='divTitle'>
                     <h2>
@@ -79,9 +84,9 @@ function Card({firstTitle, firstText, viewOnlyChecked}) {
                     <h2>
                         {title}
                     </h2>
-                    <input type="checkbox" ref={checkboxRef} className="check1" onChange={changeCheckbox}/>
+                    <input type="checkbox"  className="check1" onChange={changeCheckbox}/>
                     <div style={{width:80}}>
-                        {viewOnlyChecked &&
+                        {!viewOnlyChecked &&
                             <button
                                 onClick={editingHandler}
                                 className="editButton">
@@ -92,7 +97,7 @@ function Card({firstTitle, firstText, viewOnlyChecked}) {
                 </div>
                 <div className={checked ? alternativeStyle + ' textDiv': baseStyle + ' textDiv'} >{text}</div>
             </div>)
-    )
+    )*/
 }
 
 
