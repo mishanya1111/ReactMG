@@ -80,11 +80,15 @@ function Card({firstTitle, firstText, viewOnlyChecked}) {
                         {title}
                     </h2>
                     <input type="checkbox" ref={checkboxRef} className="check1" onChange={changeCheckbox}/>
-                    <div style={{width:80}}>{viewOnlyChecked ? "" : <button
-                        onClick={editingHandler}
-                        className="editButton">
-                        Edit<AiOutlineEdit/>
-                    </button>}</div>
+                    <div style={{width:80}}>
+                        {viewOnlyChecked &&
+                            <button
+                                onClick={editingHandler}
+                                className="editButton">
+                                Edit<AiOutlineEdit/>
+                            </button>
+                        }
+                    </div>
                 </div>
                 <div className={checked ? alternativeStyle + ' textDiv': baseStyle + ' textDiv'} >{text}</div>
             </div>)

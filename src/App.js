@@ -7,7 +7,13 @@ import cardsData from './data';
 function App() {
     const [checked, setChecked] = useState(false);
 
-    const arrayCards = cardsData.map((card) => <Card viewOnlyChecked={checked} firstTitle={card.title} firstText={card.text} key={card.id}/> )
+    const arrayCards = cardsData.map((card) =>
+        <Card
+            viewOnlyChecked={checked}
+            firstTitle={card.title}
+            firstText={card.text}
+            key={card.id}/>
+    );
     function changeCheckboxApp() {
         setChecked(!checked);
     }
