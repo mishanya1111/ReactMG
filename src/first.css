@@ -6,17 +6,17 @@ body {
 
 .card {
     width: 400px;
-    margin: 15px;
 }
 
 .card * {
     margin: 0;
 }
 
-#divTitle{
+#divTitle {
     display: flex;
     justify-content: space-between;
 }
+
 .AppLogo {
     width: 70px;
     height: 70px;
@@ -25,25 +25,66 @@ body {
 .AppHeader {
     display: flex;
     align-items: center;
+    width: 95%;
 }
 
 .borderBox {
     padding: 20px;
     border: white 1px solid;
 }
-.yellowBox{
+
+.yellowBox {
     padding: 20px;
     border: yellow 1px solid;
 }
 
-.editButton{
+.editButton {
     width: 80px;
     display: flex;
     align-items: center;
     justify-content: space-around;
+    height: 32px;
 }
-.textAreaBox{
+
+.textAreaBox {
     width: 350px;
     height: 140px;
 }
 
+.cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    /*justify-content: space-between;*/
+    gap: 20px;
+}
+
+.card {
+    width: calc(25% - 20px);
+    min-width: 300px;
+}
+
+@media (max-width: 1600px) {
+    .card {
+        width: calc(33.33% - 20px);
+    }
+}
+
+@media (max-width: 1200px) {
+    .card {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .card {
+        width: calc(100% - 20px);
+    }
+}
+
+.textDiv{
+    height: 160px;
+}
+.checkboxView{
+    margin-left: auto;
+
+}

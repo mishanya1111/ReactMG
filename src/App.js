@@ -1,20 +1,38 @@
 import logo from './logo.svg';
 import './first.css';
 import Card from './Card'
+import {useState} from "react";
+import cardsData from './data';
 
 function App() {
-    return (<div>
-        <header className="AppHeader">
-            <img src={logo} className="AppLogo" alt="logo"/>
-            <h1>Some very informative title</h1>
-        </header>
-        <Card baseStyle="borderBox" alternativeStyle="yellowBox"
-              firstTitle="React"
-              firstText="React components use props to communicate with each other. Every parent component can pass some information to its child components by giving them props. Props might remind you of HTML attributes, but you can pass any JavaScript value through them, including objects, arrays, and functions."/>
-        <Card baseStyle="borderBox" alternativeStyle="yellowBox"
-              firstTitle="Proops"
-              firstText="Props is a special keyword in React that stands for properties and is being used to pass data from one component to another and mostly from parent component to child component. We can say props is a data carrier or a means to transport data. "/>
-    </div>);
+    const [checked, setChecked] = useState(false);
+
+    const arrayCards = cardsData.map((card) =>
+        <Card
+            viewOnlyChecked={checked}
+            firstTitle={card.title}
+            firstText={card.text}
+            key={card.id}/>
+    );
+    function changeCheckboxApp() {
+        setChecked(!checked);
+    }
+
+    return (
+        <div>
+            <header className="AppHeader">
+                <img src={logo} className="AppLogo" alt="logo"/>
+                <h1>Some very informative title</h1>
+                <div className='checkboxView'>
+                    <label htmlFor='checboxView'>View only</label>
+                    <input type="checkbox" onChange={changeCheckboxApp} id='checboxView' className='checkboxView'/>
+                </div>
+            </header>
+            <div className="cardContainer">
+                {arrayCards}
+            </div>
+        </div>
+    )
 }
 
 export default App;
