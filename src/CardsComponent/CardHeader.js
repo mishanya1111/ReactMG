@@ -3,7 +3,17 @@ import {FaSave} from "react-icons/fa";
 import {AiOutlineEdit} from "react-icons/ai";
 import {useState, useEffect} from "react";
 
-function CardHeader({editing, checked, viewOnlyChecked, alternativeStyle, baseStyle, firstTitle, setCanselTemp,setEditing,setChecked}) {
+function CardHeader({
+                        editing,
+                        checked,
+                        viewOnlyChecked,
+                        alternativeStyle,
+                        baseStyle,
+                        firstTitle,
+                        setCanselTemp,
+                        setEditing,
+                        setChecked
+                    }) {
     const [title, setTitle] = useState(firstTitle);
     const [saveTitle, setSaveTitle] = useState(firstTitle);
 
@@ -20,6 +30,7 @@ function CardHeader({editing, checked, viewOnlyChecked, alternativeStyle, baseSt
     function submitHandler() {
         setEditing(false);
     }
+
     function editingHandler() {
         setSaveTitle(title);
         setChecked(false);
@@ -31,7 +42,6 @@ function CardHeader({editing, checked, viewOnlyChecked, alternativeStyle, baseSt
     }
 
     useEffect(() => {
-        console.log("useEdit");
         if (!editing) {
             setSaveTitle(title);
         }
@@ -39,20 +49,22 @@ function CardHeader({editing, checked, viewOnlyChecked, alternativeStyle, baseSt
 
 
     useEffect(() => {
-        console.log("useView");
         cancelButton();
     }, [viewOnlyChecked]);
-    console.log(firstTitle);
-    //console.log(editing);
+
     return (
         editing ? (
             <div className={checked ? alternativeStyle : baseStyle} id='divTitle'>
                 <h2>
-                    <input type='text' onChange={titleChangeHandler} value={title} style={{width: 110}}/>
+                    <input
+                        type='text'
+                        onChange={titleChangeHandler}
+                        value={title}
+                        style={{width: 110}}/>
                 </h2>
                 <button
                     onClick={cancelButton}
-                    className="cancelButton">Cancel <MdOutlineCancel/>
+                    className="cancelButton">Cancel<MdOutlineCancel/>
                 </button>
                 <button
                     onClick={submitHandler}
@@ -66,7 +78,7 @@ function CardHeader({editing, checked, viewOnlyChecked, alternativeStyle, baseSt
                 <h2>
                     {title}
                 </h2>
-                <input type="checkbox"  className="check1" onChange={changeCheckbox}/>
+                <input type="checkbox" className="check1" onChange={changeCheckbox}/>
                 <div style={{width: 80}}>
                     {!viewOnlyChecked &&
                         <button
