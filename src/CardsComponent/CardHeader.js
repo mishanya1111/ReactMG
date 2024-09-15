@@ -12,7 +12,7 @@ function CardHeader({
                         firstTitle,
                         setCanselTemp,
                         setEditing,
-                        setChecked
+                        setChecked,
                     }) {
     const [title, setTitle] = useState(firstTitle);
     const [saveTitle, setSaveTitle] = useState(firstTitle);
@@ -29,6 +29,7 @@ function CardHeader({
 
     function submitHandler() {
         setEditing(false);
+
     }
 
     function editingHandler() {
@@ -39,6 +40,8 @@ function CardHeader({
 
     function changeCheckbox() {
         setChecked((check) => !check);
+        //не знаю как правильно по CodeConvention сделать
+
     }
 
     useEffect(() => {
@@ -80,12 +83,13 @@ function CardHeader({
                 </h2>
                 <input type="checkbox" className="check1" onChange={changeCheckbox}/>
                 <div style={{width: 80}}>
-                    {!viewOnlyChecked &&
+                    {!viewOnlyChecked && (
                         <button
                             onClick={editingHandler}
                             className="editButton">
                             Edit<AiOutlineEdit/>
                         </button>
+                    )
                     }
                 </div>
             </div>
