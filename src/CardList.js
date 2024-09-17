@@ -4,7 +4,7 @@ import Card from './Card'
 import {useState} from "react";
 import cardsData from './data';
 
-function App() {
+function CardList() {
     const [checked, setChecked] = useState(false);
     const [arrayOfDeleteKeys, setArrayOfDeleteKeys] = useState([]);
     const [currentCardsData, setCurrentCardsData] = useState(cardsData);
@@ -50,4 +50,4 @@ function App() {
     )
 }
 
-export default App;
+export default CardList;
