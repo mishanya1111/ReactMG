@@ -1,7 +1,7 @@
-import './first.css';
+import '../first.css';
 import {useState,useEffect} from "react";
-import CardHeader from "./CardsComponent/CardHeader";
-import CardBody from "./CardsComponent/CardBody";
+import CardHeader from "./CardHeader";
+import CardBody from "./CardBody";
 
 function Card({
                   firstTitle,
