@@ -1,33 +1,20 @@
-import {useEffect, useState} from "react";
-
-function CardBody({checked, alternativeStyle, baseStyle, firstText, editing, setCanselTemp, canselTemp}) {
-    const [text, setText] = useState(firstText);
-    const [saveText, setSaveText] = useState(firstText);
-
-    function textChangeHandler(event) {
-        setText(event.target.value);
-    }
-
-    useEffect(() => {
-        if (editing) {
-            setSaveText(text);
-        }
-    }, [editing]);
-
-    useEffect(() => {
-        setCanselTemp(false);
-        setText(saveText);
-    }, [canselTemp]);
-
+function CardBody({
+                      editing,
+                      checked,
+                      alternativeStyle,
+                      baseStyle,
+                      value,
+                      onChange,
+                  }) {
 
     return (
         editing ? (
             <div className={checked ? alternativeStyle + ' textDiv' : baseStyle + ' textDiv'}>
-                <textarea onChange={textChangeHandler} className="textAreaBox" value={text}/>
+                <textarea onChange={onChange} className="textAreaBox" value={value}/>
             </div>
         ) : (
             <div className={checked ? alternativeStyle + ' textDiv' : baseStyle + ' textDiv'}>
-                {text}
+                {value}
             </div>)
     )
 }

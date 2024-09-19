@@ -1,77 +1,37 @@
 import {MdOutlineCancel} from "react-icons/md";
 import {FaSave} from "react-icons/fa";
 import {AiOutlineEdit} from "react-icons/ai";
-import {useState, useEffect} from "react";
 
 function CardHeader({
-                        editing,
+                        value,
+                        inputChange,
+                        onCansel,
+                        onSave,
+                        onChange,
+                        onEdit,
                         checked,
-                        viewOnlyChecked,
+                        editing,
+                        isDisableMode,
                         alternativeStyle,
                         baseStyle,
-                        firstTitle,
-                        setCanselTemp,
-                        setEditing,
-                        setChecked,
                     }) {
-    const [title, setTitle] = useState(firstTitle);
-    const [saveTitle, setSaveTitle] = useState(firstTitle);
-
-    function titleChangeHandler(event) {
-        setTitle(event.target.value);
-    }
-
-    function cancelButton() {
-        setTitle(saveTitle);
-        setEditing(false);
-        setCanselTemp(true);
-    }
-
-    function submitHandler() {
-        setEditing(false);
-
-    }
-
-    function editingHandler() {
-        setSaveTitle(title);
-        setChecked(false);
-        setEditing(true);
-    }
-
-    function changeCheckbox() {
-        setChecked((check) => !check);
-        //не знаю как правильно по CodeConvention сделать
-
-    }
-
-    useEffect(() => {
-        if (!editing) {
-            setSaveTitle(title);
-        }
-    }, [editing]);
-
-
-    useEffect(() => {
-        cancelButton();
-    }, [viewOnlyChecked]);
-
     return (
         editing ? (
             <div className={checked ? alternativeStyle : baseStyle} id='divTitle'>
                 <h2>
                     <input
                         type='text'
-                        onChange={titleChangeHandler}
-                        value={title}
+                        onChange={inputChange}
+                        value={value}
                         style={{width: 110}}/>
                 </h2>
                 <button
-                    onClick={cancelButton}
+                    onClick={onCansel}
                     className="cancelButton">Cancel<MdOutlineCancel/>
                 </button>
                 <button
-                    onClick={submitHandler}
-                    className="editButton">
+                    onClick={onSave}
+                    className="cardButton">
                     Save<FaSave/>
                 </button>
             </div>
@@ -79,14 +39,14 @@ function CardHeader({
         ) : (
             <div className={checked ? alternativeStyle : baseStyle} id='divTitle'>
                 <h2>
-                    {title}
+                    {value}
                 </h2>
-                <input type="checkbox" className="check1" onChange={changeCheckbox}/>
+                <input type="checkbox" className="check1" onChange={onChange}/>
                 <div style={{width: 80}}>
-                    {!viewOnlyChecked && (
+                    {!isDisableMode && (
                         <button
-                            onClick={editingHandler}
-                            className="editButton">
+                            onClick={onEdit}
+                            className="cardButton">
                             Edit<AiOutlineEdit/>
                         </button>
                     )

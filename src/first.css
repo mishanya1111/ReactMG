@@ -38,7 +38,7 @@ body {
     border: yellow 1px solid;
 }
 
-.editButton {
+.cardButton {
     width: 80px;
     display: flex;
     align-items: center;
