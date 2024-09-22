@@ -12,12 +12,10 @@ function CardHeader({
                         checked,
                         editing,
                         isDisableMode,
-                        alternativeStyle,
-                        baseStyle,
                     }) {
     return (
         editing ? (
-            <div className={checked ? alternativeStyle : baseStyle} id='divTitle'>
+            <div className={checked ? 'yellowBox' : 'borderBox'} id='divTitle'>
                 <h2>
                     <input
                         type='text'
@@ -37,7 +35,7 @@ function CardHeader({
             </div>
 
         ) : (
-            <div className={checked ? alternativeStyle : baseStyle} id='divTitle'>
+            <div className={checked ? 'yellowBox' : 'borderBox'} id='divTitle'>
                 <h2>
                     {value}
                 </h2>

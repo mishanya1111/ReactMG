@@ -8,19 +8,18 @@ function App() {
     const [checked, setChecked] = useState(false);
     const [data, setData] = useState(cardsData);
 
-    const changeActiveHandler = (id) => {
-        console.log(id)
-        setData((array) => {
-            for (const el of array) {
-                if (el.id === id) {
-                    el.isActive = !el.isActive;
-                    console.log(el.id + "  " + el.isActive);
-                    console.log(array);
+    const changeActiveHandler = id => {
+        setData(cards =>
+            cards.map(card => {
+                if (card.id === id) {
+                    const prev = { ...card };
+                    prev.isActive = !card.isActive;
+                    return prev;
                 }
-            }
-            return array;
-        })
-    }
+                return card;
+            })
+        );
+    };
 
     const deleteHandler = () => {
         //COdeConvention?

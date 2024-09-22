@@ -16,8 +16,6 @@ function Card({
     const [text, setText] = useState(firstText);
     const [saveText, setSaveText] = useState(firstText);
     const [saveTitle, setSaveTitle] = useState(firstTitle);
-    const baseStyle="borderBox";
-    const alternativeStyle= "yellowBox";
 
     useEffect(() => {
         cancelButton();
@@ -54,7 +52,9 @@ function Card({
 
     function editingHandler() {
         setSaveInf();
-        setChecked(false);
+        if(checked){
+            changeCheckbox();
+        }
         setEditing(true);
     }
 
@@ -69,18 +69,13 @@ function Card({
                 checked={checked}
                 editing={editing}
                 isDisableMode={viewOnlyChecked}
-                alternativeStyle={alternativeStyle}
-                baseStyle={baseStyle}
                 onEdit={editingHandler}
             />
             <CardBody
                 editing={editing}
                 checked={checked}
-                alternativeStyle={alternativeStyle}
-                baseStyle={baseStyle}
                 value={text}
                 onChange={textChangeHandler}
-
             />
         </div>
     )
