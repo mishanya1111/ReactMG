@@ -30,23 +30,38 @@ function App() {
         setChecked(!checked);
     }
 
+    function addNewCard() {
+        setData([{
+            id: 9,
+            title: '',
+            text: '',
+            isActive: false
+        }, ...data])
+    }
+
     return (
         <div>
             <header className="AppHeader">
                 <img src={logo} className="AppLogo" alt="logo" />
                 <h1>Some very informative title</h1>
+
                 <div className="checkboxView">
-                    <label htmlFor="checboxView">View only</label>
                     <input
                         type="checkbox"
                         onChange={changeCheckboxApp}
                         id="checboxView"
                         className="checkboxView"
                     />
+                    <label htmlFor="checboxView">View only</label>
                 </div>
                 <button
+                  onClick={addNewCard}
+                  style={{ marginLeft: 10 }}
+                >
+                    Add Card
+                </button>
+                <button
                     onClick={deleteHandler}
-                    className="deleteButton"
                     style={{ marginLeft: 10 }}
                 >
                     Delete selected cards
