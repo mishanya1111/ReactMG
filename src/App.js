@@ -3,12 +3,13 @@ import './first.css';
 import { useState } from 'react';
 import cardsData from './data';
 import CardList from './CardsComponent/CardList';
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
     const [checked, setChecked] = useState(false);
     const [data, setData] = useState(cardsData);
 
-    const changeActiveHandler = id => {
+    function changeActiveHandler(id) {
         setData(cards =>
             cards.map(card => {
                 if (card.id === id) {
@@ -19,24 +20,26 @@ function App() {
                 return card;
             })
         );
-    };
+    }
 
-    const deleteHandler = () => {
-        //COdeConvention?
+    function deleteHandler() {
         setData(card => card.filter(el => !el.isActive));
-    };
+    }
 
     function changeCheckboxApp() {
         setChecked(!checked);
     }
 
     function addNewCard() {
-        setData([{
-            id: 9,
-            title: '',
-            text: '',
-            isActive: false
-        }, ...data])
+        setData([
+            {
+                id: uuidv4(),
+                title: '',
+                text: '',
+                isActive: false
+            },
+            ...data
+        ]);
     }
 
     return (
@@ -54,16 +57,10 @@ function App() {
                     />
                     <label htmlFor="checboxView">View only</label>
                 </div>
-                <button
-                  onClick={addNewCard}
-                  style={{ marginLeft: 10 }}
-                >
+                <button onClick={addNewCard} style={{ marginLeft: 10 }}>
                     Add Card
                 </button>
-                <button
-                    onClick={deleteHandler}
-                    style={{ marginLeft: 10 }}
-                >
+                <button onClick={deleteHandler} style={{ marginLeft: 10 }}>
                     Delete selected cards
                 </button>
             </header>
