@@ -1,23 +1,27 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 function withLoadingDelay(WrappedComponent) {
-  return function WithDelayComponent(props) {
-    const [isLoading, setIsLoading] = useState(true);
+    return function WithDelayComponent(props) {
+        const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-      const timer = setTimeout(() => {
-        setIsLoading(false);
-      }, 2000);
+        useEffect(() => {
+            const timer = setTimeout(() => {
+                setIsLoading(false);
+            }, 2000);
 
-      return () => clearTimeout(timer);
-    }, []);
+            return () => clearTimeout(timer);
+        }, []);
 
-    if (isLoading) {
-      return <div className='spinBox'><div className="spinner"></div></div>;
-    }
+        if (isLoading) {
+            return (
+                <div className="spinBox">
+                    <div className="spinner"></div>
+                </div>
+            );
+        }
 
-    return <WrappedComponent {...props} />;
-  };
+        return <WrappedComponent {...props} />;
+    };
 }
 
 export default withLoadingDelay;
