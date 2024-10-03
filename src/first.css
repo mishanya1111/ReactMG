@@ -62,9 +62,20 @@ body {
     width: calc(25% - 20px);
     min-width: 300px;
 }
+.spinBox {
+    height: 276px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(25% - 20px);
+    min-width: 300px;
+}
 
 @media (max-width: 1600px) {
     .card {
+        width: calc(33.33% - 20px);
+    }
+    .spinBox{
         width: calc(33.33% - 20px);
     }
 }
@@ -73,10 +84,16 @@ body {
     .card {
         width: calc(50% - 20px);
     }
+    .spinBox{
+        width: calc(50% - 20px);
+    }
 }
 
 @media (max-width: 768px) {
     .card {
+        width: calc(100% - 20px);
+    }
+    .spinBox{
         width: calc(100% - 20px);
     }
 }
@@ -87,4 +104,22 @@ body {
 .checkboxView{
     margin-left: auto;
 
+}
+
+.spinner {
+    width: 64px;
+    height: 64px;
+    border: 8px solid;
+    border-color: #3d5af1 transparent #3d5af1 transparent;
+    border-radius: 50%;
+    animation: spin-anim 1.2s linear infinite;
+}
+
+@keyframes spin-anim {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
