@@ -8,7 +8,7 @@ export const CardContext = createContext({
 
 export default function CardContextProvider({children}) {
 
-  return <CardContext.Provider value={cardCtx}>
+  return <CardContext.Provider value={[]}>
     {children}
   </CardContext.Provider>
 }
