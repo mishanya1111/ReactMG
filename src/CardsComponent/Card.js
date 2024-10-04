@@ -2,7 +2,19 @@ import '../first.css';
 import { useState, useEffect } from 'react';
 import CardHeader from './CardHeader';
 import CardBody from './CardBody';
+import PropTypes from 'prop-types';
 
+
+Card.propTypes = {
+    firstTitle:PropTypes.string,
+    firstText:PropTypes.string,
+    viewOnlyChecked:PropTypes.bool.isRequired,
+    id:PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]).isRequired,
+    checkBoxChange:PropTypes.func.isRequired,
+};
 function Card({ firstTitle, firstText, viewOnlyChecked, id, checkBoxChange }) {
     const [checked, setChecked] = useState(false);
     const [editing, setEditing] = useState(false);

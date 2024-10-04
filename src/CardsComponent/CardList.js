@@ -1,9 +1,10 @@
 import Card from './Card';
-import withLoadingDelay from '../withLoadingDelay';
+import withLoadingDelay from './withLoadingDelay';
+import {CardContext} from './contextCardList'
 const CardWithLoading = withLoadingDelay(Card);
 function CardList({ onChecked, checkBoxChange, items }) {
     return (
-        <>
+        <CardContext.Provider>
             {items.map(card => (
                 <CardWithLoading
                     viewOnlyChecked={onChecked}
@@ -14,7 +15,7 @@ function CardList({ onChecked, checkBoxChange, items }) {
                     checkBoxChange={checkBoxChange}
                 />
             ))}
-        </>
+        </CardContext.Provider>
     );
 }
 
