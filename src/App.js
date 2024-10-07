@@ -1,46 +1,13 @@
 import logo from './logo.svg';
 import './first.css';
-import { useState } from 'react';
-import cardsData from './data';
+import { useContext } from 'react';
 import CardList from './CardsComponent/CardList';
-import { v4 as uuidv4 } from 'uuid';
+
+import { CardContext } from "./CardsComponent/contextCardList";
 
 function App() {
-    const [checked, setChecked] = useState(false);
-    const [data, setData] = useState(cardsData);
-
-    function changeActiveHandler(id) {
-        setData(cards =>
-            cards.map(card => {
-                if (card.id === id) {
-                    const prev = { ...card };
-                    prev.isActive = !card.isActive;
-                    return prev;
-                }
-                return card;
-            })
-        );
-    }
-
-    function deleteHandler() {
-        setData(card => card.filter(el => !el.isActive));
-    }
-
-    function changeCheckboxApp() {
-        setChecked(!checked);
-    }
-
-    function addNewCard() {
-        setData([
-            {
-                id: uuidv4(),
-                title: '',
-                text: '',
-                isActive: false
-            },
-            ...data
-        ]);
-    }
+    const { viewOnlyCheckBoxClick, addNewCard, deleteSelectedCard } =
+        useContext(CardContext);
 
     return (
         <div>
@@ -51,7 +18,7 @@ function App() {
                 <div className="checkboxView">
                     <input
                         type="checkbox"
-                        onChange={changeCheckboxApp}
+                        onChange={viewOnlyCheckBoxClick}
                         id="checboxView"
                         className="checkboxView"
                     />
@@ -60,16 +27,12 @@ function App() {
                 <button onClick={addNewCard} style={{ marginLeft: 10 }}>
                     Add Card
                 </button>
-                <button onClick={deleteHandler} style={{ marginLeft: 10 }}>
+                <button onClick={deleteSelectedCard} style={{ marginLeft: 10 }}>
                     Delete selected cards
                 </button>
             </header>
             <div className="cardContainer">
-                <CardList
-                    onChecked={checked}
-                    items={data}
-                    checkBoxChange={changeActiveHandler}
-                />
+                <CardList />
             </div>
         </div>
     );

@@ -1,35 +1,30 @@
 import '../first.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { CardContext } from './contextCardList';
 import CardHeader from './CardHeader';
 import CardBody from './CardBody';
 import PropTypes from 'prop-types';
 
-
 Card.propTypes = {
-    firstTitle:PropTypes.string,
-    firstText:PropTypes.string,
-    viewOnlyChecked:PropTypes.bool.isRequired,
-    id:PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ]).isRequired,
-    checkBoxChange:PropTypes.func.isRequired,
+    firstTitle: PropTypes.string,
+    firstText: PropTypes.string,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
 };
-function Card({ firstTitle, firstText, viewOnlyChecked, id, checkBoxChange }) {
+function Card({ firstTitle, firstText, id }) {
     const [checked, setChecked] = useState(false);
     const [editing, setEditing] = useState(false);
     const [title, setTitle] = useState(firstTitle);
     const [text, setText] = useState(firstText);
     const [saveText, setSaveText] = useState(firstText);
     const [saveTitle, setSaveTitle] = useState(firstTitle);
-
+    const { viewOnly, cardCheckBoxClick } = useContext(CardContext);
     useEffect(() => {
         cancelButton();
-    }, [viewOnlyChecked]);
+    }, [viewOnly]);
 
     function changeCheckbox() {
         setChecked(check => !check);
-        checkBoxChange(id);
+        cardCheckBoxClick(id);
     }
 
     function titleChangeHandler(event) {
@@ -74,7 +69,7 @@ function Card({ firstTitle, firstText, viewOnlyChecked, id, checkBoxChange }) {
                 onChange={changeCheckbox}
                 checked={checked}
                 editing={editing}
-                isDisableMode={viewOnlyChecked}
+                isDisableMode={viewOnly}
                 onEdit={editingHandler}
             />
             <CardBody

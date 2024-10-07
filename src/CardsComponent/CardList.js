@@ -1,21 +1,24 @@
 import Card from './Card';
 import withLoadingDelay from './withLoadingDelay';
-import {CardContext} from './contextCardList'
+import { CardContext } from './contextCardList';
+import { useContext } from 'react';
+
 const CardWithLoading = withLoadingDelay(Card);
-function CardList({ onChecked, checkBoxChange, items }) {
+function CardList() {
+    const { items } = useContext(CardContext);
     return (
-        <CardContext.Provider>
+        <>
             {items.map(card => (
                 <CardWithLoading
-                    viewOnlyChecked={onChecked}
+                    //viewOnlyChecked={viewOnlyCheckBoxClick}
                     firstTitle={card.title}
                     firstText={card.text}
                     key={card.id}
                     id={card.id}
-                    checkBoxChange={checkBoxChange}
+                    //checkBoxChange={checkBoxChange}
                 />
             ))}
-        </CardContext.Provider>
+        </>
     );
 }
 
