@@ -1,15 +1,10 @@
 import '../first.css';
 import { useState, useEffect, useContext } from 'react';
-import { CardContext } from './contextCardList';
+import { CardContext } from '../context/сardArrayContext';
 import CardHeader from './CardHeader';
 import CardBody from './CardBody';
 import PropTypes from 'prop-types';
 
-Card.propTypes = {
-    firstTitle: PropTypes.string,
-    firstText: PropTypes.string,
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
-};
 function Card({ firstTitle, firstText, id }) {
     const [checked, setChecked] = useState(false);
     const [editing, setEditing] = useState(false);
@@ -82,4 +77,9 @@ function Card({ firstTitle, firstText, id }) {
     );
 }
 
+Card.propTypes = {
+    firstTitle: PropTypes.string,
+    firstText: PropTypes.string,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+};
 export default Card;

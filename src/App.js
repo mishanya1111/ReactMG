@@ -1,12 +1,12 @@
 import logo from './logo.svg';
 import './first.css';
 import { useContext } from 'react';
-import CardList from './CardsComponent/CardList';
+import CardList from './сomponents/CardList';
 
-import { CardContext } from "./CardsComponent/contextCardList";
+import { CardContext } from './context/сardArrayContext';
 
 function App() {
-    const { viewOnlyCheckBoxClick, addNewCard, deleteSelectedCard } =
+    const { viewOnlyCheckBoxClick, addNewCard, deleteSelectedCard, items } =
         useContext(CardContext);
 
     return (
@@ -14,7 +14,9 @@ function App() {
             <header className="AppHeader">
                 <img src={logo} className="AppLogo" alt="logo" />
                 <h1>Some very informative title</h1>
-
+                <span className="badge" style={{ marginLeft: 10 }}>
+                    Count card: {items.length}
+                </span>
                 <div className="checkboxView">
                     <input
                         type="checkbox"

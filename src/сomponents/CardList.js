@@ -1,6 +1,6 @@
 import Card from './Card';
-import withLoadingDelay from './withLoadingDelay';
-import { CardContext } from './contextCardList';
+import withLoadingDelay from '../hooks/withLoadingDelay';
+import { CardContext } from '../context/сardArrayContext';
 import { useContext } from 'react';
 
 const CardWithLoading = withLoadingDelay(Card);
