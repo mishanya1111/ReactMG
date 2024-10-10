@@ -14,7 +14,10 @@ function CardHeader({
     isDisableMode
 }) {
     return editing ? (
-        <div className={checked ? 'yellowBox' : 'borderBox'} id="divTitle">
+        <div
+            className={checked ? 'yellowBox divTitle' : 'borderBox divTitle'}
+            id="divTitle"
+        >
             <h2>
                 <input
                     type="text"
@@ -33,7 +36,7 @@ function CardHeader({
             </button>
         </div>
     ) : (
-        <div className={checked ? 'yellowBox' : 'borderBox'} id="divTitle">
+        <div className={checked ? 'yellowBox divTitle' : 'borderBox divTitle'}>
             <h2>{value}</h2>
             <input type="checkbox" className="check1" onChange={onChange} />
             <div style={{ width: 80 }}>
