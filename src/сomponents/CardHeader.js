@@ -1,6 +1,7 @@
 import { MdOutlineCancel } from 'react-icons/md';
 import { FaSave } from 'react-icons/fa';
 import { AiOutlineEdit } from 'react-icons/ai';
+import CastomDiv from './CastomDiv';
 
 function CardHeader({
     value,
@@ -14,10 +15,7 @@ function CardHeader({
     isDisableMode
 }) {
     return editing ? (
-        <div
-            className={checked ? 'yellowBox divTitle' : 'borderBox divTitle'}
-            id="divTitle"
-        >
+        <CastomDiv $checked={checked} $title={true}>
             <h2>
                 <input
                     type="text"
@@ -34,9 +32,9 @@ function CardHeader({
                 Save
                 <FaSave />
             </button>
-        </div>
+        </CastomDiv>
     ) : (
-        <div className={checked ? 'yellowBox divTitle' : 'borderBox divTitle'}>
+        <CastomDiv $checked={checked} $title={true}>
             <h2>{value}</h2>
             <input type="checkbox" className="check1" onChange={onChange} />
             <div style={{ width: 80 }}>
@@ -47,7 +45,7 @@ function CardHeader({
                     </button>
                 )}
             </div>
-        </div>
+        </CastomDiv>
     );
 }
 

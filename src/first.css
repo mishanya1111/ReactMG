@@ -12,11 +12,6 @@ body {
     margin: 0;
 }
 
-.divTitle {
-    display: flex;
-    justify-content: space-between;
-}
-
 .AppLogo {
     width: 70px;
     height: 70px;
@@ -29,15 +24,6 @@ body {
     width: 95%;
 }
 
-.borderBox {
-    padding: 20px;
-    border: white 1px solid;
-}
-
-.yellowBox {
-    padding: 20px;
-    border: yellow 1px solid;
-}
 
 .cardButton {
     width: 80px;
@@ -99,12 +85,9 @@ body {
     }
 }
 
-.textDiv{
-    height: 160px;
-}
+
 .checkboxView{
     margin-left: auto;
-
 }
 
 .spinner {
