@@ -1,6 +1,7 @@
-import { createContext, useState } from 'react';
-import cardsData from '../data';
+import { createContext, useState, useEffect } from 'react';
+import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+
 export const CardContext = createContext({
     items: [],
     cardCheckBoxClick: () => {},
@@ -12,7 +13,25 @@ export const CardContext = createContext({
 
 export default function CardContextProvider({ children }) {
     const [checked, setChecked] = useState(false);
-    const [data, setData] = useState(cardsData);
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        const apiUrl =
+            'https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json';
+        axios.get(apiUrl).then(resp => {
+            const allCards = resp.data;
+            const resData = allCards
+                .filter(el => el.Number < 16)
+                .map(el => {
+                    return {
+                        id: el.Number,
+                        title: el.Name,
+                        text: el.About,
+                        isActive: false
+                    };
+                });
+            setData(resData);
+        });
+    }, []);
 
     function changeActiveHandler(id) {
         setData(cards =>
