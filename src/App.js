@@ -2,9 +2,13 @@ import logo from './logo.svg';
 import './first.css';
 import { useContext } from 'react';
 import CardList from './сomponents/CardList';
-
+import styled from 'styled-components';
 import { CardContext } from './context/сardArrayContext';
-
+const InputViewOnly = styled.input`
+    &:hover {
+        scale: 2;
+    }
+`;
 function App() {
     const { viewOnlyCheckBoxClick, addNewCard, deleteSelectedCard, items } =
         useContext(CardContext);
@@ -18,11 +22,9 @@ function App() {
                     Count card: {items.length}
                 </span>
                 <div className="checkboxView">
-                    <input
+                    <InputViewOnly
                         type="checkbox"
                         onChange={viewOnlyCheckBoxClick}
-                        id="checboxView"
-                        className="checkboxView"
                     />
                     <label htmlFor="checboxView">View only</label>
                 </div>
