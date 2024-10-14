@@ -1,12 +1,12 @@
-import CastomDiv from './CastomDiv';
+import CustomDiv from './CustomDiv';
 
 function CardBody({ editing, checked, value, onChange }) {
     return editing ? (
-        <CastomDiv $checked={checked}>
+        <CustomDiv $checked={checked}>
             <textarea onChange={onChange} className="textAreaBox" value={value} />
-        </CastomDiv>
+        </CustomDiv>
     ) : (
-        <CastomDiv $checked={checked}>{value}</CastomDiv>
+        <CustomDiv $checked={checked}>{value}</CustomDiv>
     );
 }
 
