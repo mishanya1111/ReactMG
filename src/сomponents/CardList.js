@@ -5,19 +5,19 @@ import { useContext } from 'react';
 
 const CardWithLoading = withLoadingDelay(Card);
 function CardList() {
-    const { items } = useContext(CardContext);
+    const { items, errorFetch } = useContext(CardContext);
     return (
         <>
-            {items.map(card => (
-                <CardWithLoading
-                    //viewOnlyChecked={viewOnlyCheckBoxClick}
-                    firstTitle={card.title}
-                    firstText={card.text}
-                    key={card.id}
-                    id={card.id}
-                    //checkBoxChange={checkBoxChange}
-                />
-            ))}
+            {errorFetch && <h1 style={{ color: 'red' }}>The data was not fetch</h1>}
+            {!errorFetch &&
+                items.map(card => (
+                    <CardWithLoading
+                        firstTitle={card.title}
+                        firstText={card.text}
+                        key={card.id}
+                        id={card.id}
+                    />
+                ))}
         </>
     );
 }
