@@ -5,11 +5,18 @@ import { useContext } from 'react';
 
 const CardWithLoading = withLoadingDelay(Card);
 function CardList() {
-    const { items, errorFetch } = useContext(CardContext);
+    const { items, errorFetch, fetchingDate } = useContext(CardContext);
     return (
         <>
-            {errorFetch && <h1 style={{ color: 'red' }}>The data was not fetch</h1>}
-            {!errorFetch &&
+            {fetchingDate &&
+              <div className="preloader">
+                <div className="preloader__row">
+                    <div className="preloader__item"></div>
+                    <div className="preloader__item"></div>
+                </div>
+            </div>}
+            {!fetchingDate && errorFetch && <h1 style={{ color: 'red' }}>The data was not fetch</h1>}
+            {!fetchingDate &&  !errorFetch &&
                 items.map(card => (
                     <CardWithLoading
                         firstTitle={card.title}
