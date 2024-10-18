@@ -16,32 +16,36 @@ export const CardContext = createContext({
 export default function CardContextProvider({ children }) {
     const [checked, setChecked] = useState(false);
     const [data, setData] = useState([]);
-    const [fetching, setFetching] = useState(false);
+    const [fetching, setFetching] = useState(undefined);
     const [errorFetching, setErrorFetching] = useState(false);
 
-    useEffect(() => {
-        async function fetchData() {
-            setFetching(true);
-            try {
-                const apiUrl =
-                    'https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json';
-                const resp = await axios.get(apiUrl);
-                const allCards = resp.data;
-                const resData = allCards.slice(0, 15).map(el => {
-                    return {
-                        id: el.Number,
-                        title: el.Name,
-                        text: el.About,
-                        isActive: false
-                    };
-                });
-                setData(resData);
-            } catch (err) {
-                setErrorFetching(true);
-                //alert(`The data was not fetch\nError message:${err.message}`);
-            }
+    async function fetchData() {
+        setFetching(true);
+        try {
+            const apiUrl =
+              'https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json';
+            const resp = await axios.get(apiUrl);
+            const allCards = resp.data;
+            const resData = allCards.slice(0, 15).map(el => {
+                return {
+                    id: el.Number,
+                    title: el.Name,
+                    text: el.About,
+                    isActive: false
+                };
+            });
+            setData(resData);
+        } catch (err) {
+            setErrorFetching(err);
+            //alert(`The data was not fetch\nError message:${err.message}`);
+        }
+        finally {
             setFetching(false);
         }
+
+    }
+    useEffect(() => {
+
         fetchData();
     }, []);
 
