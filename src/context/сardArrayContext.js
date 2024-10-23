@@ -16,8 +16,8 @@ export const CardContext = createContext({
 export default function CardContextProvider({ children }) {
     const [checked, setChecked] = useState(false);
     const [data, setData] = useState([]);
-    const [fetching, setFetching] = useState(undefined);
-    const [errorFetching, setErrorFetching] = useState(false);
+    const [fetching, setFetching] = useState(false);
+    const [errorFetching, setErrorFetching] = useState(undefined);
 
     async function fetchData() {
         setFetching(true);
