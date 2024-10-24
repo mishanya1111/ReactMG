@@ -17,7 +17,7 @@ export default function CardContextProvider({ children }) {
     const [checked, setChecked] = useState(false);
     const [data, setData] = useState([]);
     const [fetching, setFetching] = useState(false);
-    const [errorFetching, setErrorFetching] = useState(undefined);
+    const [error, setError] = useState(undefined);
 
     async function fetchData() {
         setFetching(true);
@@ -36,7 +36,7 @@ export default function CardContextProvider({ children }) {
             });
             setData(resData);
         } catch (err) {
-            setErrorFetching(err);
+            setError(err);
             //alert(`The data was not fetch\nError message:${err.message}`);
         }
         finally {
@@ -71,8 +71,8 @@ export default function CardContextProvider({ children }) {
     }
 
     function addNewCard() {
-        if (errorFetching) {
-            setErrorFetching(false);
+        if (error) {
+            setError(false);
         }
         setData([
             {
@@ -93,7 +93,7 @@ export default function CardContextProvider({ children }) {
         deleteSelectedCard: deleteHandler,
         viewOnly: checked,
         fetchingDate: fetching,
-        errorFetch: errorFetching
+        errorFetch: error
     };
     return (
         <CardContext.Provider value={contextValue}>{children}</CardContext.Provider>
