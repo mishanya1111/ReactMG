@@ -10,42 +10,42 @@ export const CardContext = createContext({
     deleteSelectedCard: () => {},
     viewOnly: false,
     fetchingDate: false,
-    errorFetch: false
+    error: false
 });
 
 export default function CardContextProvider({ children }) {
     const [checked, setChecked] = useState(false);
     const [data, setData] = useState([]);
     const [fetching, setFetching] = useState(false);
-    const [error, setError] = useState(undefined);
+    const [error, setError] = useState(undefined); 
 
-    async function fetchData() {
-        setFetching(true);
-        try {
-            const apiUrl =
-              'https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json';
-            const resp = await axios.get(apiUrl);
-            const allCards = resp.data;
-            const resData = allCards.slice(0, 15).map(el => {
-                return {
-                    id: el.Number,
-                    title: el.Name,
-                    text: el.About,
-                    isActive: false
-                };
-            });
-            setData(resData);
-        } catch (err) {
-            setError(err);
-            //alert(`The data was not fetch\nError message:${err.message}`);
-        }
-        finally {
-            setFetching(false);
-        }
 
-    }
     useEffect(() => {
+        setFetching(true);
+        async function fetchData() {
+            try {
+                const apiUrl =
+                  'https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json';
+                const resp = await axios.get(apiUrl);
+                const allCards = resp.data;
+                const resData = allCards.slice(0, 15).map(el => {
+                    return {
+                        id: el.Number,
+                        title: el.Name,
+                        text: el.About,
+                        isActive: false
+                    };
+                });
+                setData(resData);
+            } catch (err) {
+                setError(err);
+                //alert(`The data was not fetch\nError message:${err.message}`);
+            }
+            finally {
+                setFetching(false);
+            }
 
+        }
         fetchData();
     }, []);
 
@@ -71,9 +71,6 @@ export default function CardContextProvider({ children }) {
     }
 
     function addNewCard() {
-        if (error) {
-            setError(false);
-        }
         setData([
             {
                 id: uuidv4(),
@@ -93,7 +90,7 @@ export default function CardContextProvider({ children }) {
         deleteSelectedCard: deleteHandler,
         viewOnly: checked,
         fetchingDate: fetching,
-        errorFetch: error
+        error: error
     };
     return (
         <CardContext.Provider value={contextValue}>{children}</CardContext.Provider>

@@ -5,7 +5,7 @@ import { useContext } from 'react';
 
 
 function CardList() {
-    const { items, errorFetch, fetchingDate } = useContext(CardContext);
+    const { items, error, fetchingDate } = useContext(CardContext);
     return (
       <>
           {fetchingDate ? (
@@ -17,8 +17,8 @@ function CardList() {
             </div>
           ) : (
             <>
-                {errorFetch && <h1 style={{ color: 'red' }}>{errorFetch.message}</h1>}
-                {!errorFetch &&
+                {error && <h1 style={{ color: 'red' }}>{error.message}</h1>}
+                {!error &&
                   items.map(card => (
                     <Card
                       firstTitle={card.title}
