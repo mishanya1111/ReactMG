@@ -17,15 +17,14 @@ export default function CardContextProvider({ children }) {
     const [checked, setChecked] = useState(false);
     const [data, setData] = useState([]);
     const [fetching, setFetching] = useState(false);
-    const [error, setError] = useState(undefined); 
-
+    const [error, setError] = useState(undefined);
 
     useEffect(() => {
         setFetching(true);
         async function fetchData() {
             try {
                 const apiUrl =
-                  'https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json';
+                    '22https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json';
                 const resp = await axios.get(apiUrl);
                 const allCards = resp.data;
                 const resData = allCards.slice(0, 15).map(el => {
@@ -40,11 +39,9 @@ export default function CardContextProvider({ children }) {
             } catch (err) {
                 setError(err);
                 //alert(`The data was not fetch\nError message:${err.message}`);
-            }
-            finally {
+            } finally {
                 setFetching(false);
             }
-
         }
         fetchData();
     }, []);

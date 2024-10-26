@@ -1,4 +1,4 @@
-import { /*useState, useEffect, */useContext } from 'react';
+import { /*useState, useEffect, */ useContext } from 'react';
 import { CardContext } from '../context/сardArrayContext';
 
 function withLoadingDelay(WrappedComponent) {
