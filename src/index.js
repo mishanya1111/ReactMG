@@ -4,12 +4,32 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import CardContextProvider from './context/сardArrayContext';
-
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import NotFoundPage from './Router/NotFoundPage';
+import Root from './Router/Root';
+import LoginPage from './Router/LoginPage';
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <Root />,
+        errorElement: <NotFoundPage />,
+        children: [
+            {
+                index: true,
+                element: <LoginPage />
+            },
+            {
+                path: 'cards',
+                element: <App />
+            }
+        ]
+    }
+]);
 root.render(
     <React.StrictMode>
         <CardContextProvider>
-            <App />
+            <RouterProvider router={router} />
         </CardContextProvider>
     </React.StrictMode>
 );
