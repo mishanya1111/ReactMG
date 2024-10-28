@@ -2,9 +2,13 @@ import logo from './logo.svg';
 import './first.css';
 import { useContext } from 'react';
 import CardList from './сomponents/CardList';
-
+import styled from 'styled-components';
 import { CardContext } from './context/сardArrayContext';
-
+const InputViewOnly = styled.input`
+    &:hover {
+        scale: 2;
+    }
+`;
 function App() {
     const {
         viewOnlyCheckBoxClick,
@@ -18,9 +22,11 @@ function App() {
     return (
         <div>
             <header className="AppHeader">
+
                 <div className="headerLeft">
                     <img src={logo} className="AppLogo" alt="logo" />
                     <h1>Some very informative title</h1>
+
                 </div>
 
                 {!error && !fetchingDate && (

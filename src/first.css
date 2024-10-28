@@ -12,11 +12,6 @@ body {
     margin: 0;
 }
 
-.divTitle {
-    display: flex;
-    justify-content: space-between;
-}
-
 .AppLogo {
     width: 70px;
     height: 70px;
@@ -27,6 +22,7 @@ body {
     align-items: center;
     width: 95%;
 }
+
 
 .headerLeft {
     display: flex;
@@ -109,12 +105,9 @@ body {
     }
 }
 
-.textDiv{
-    height: 160px;
-}
+
 .checkboxView{
     margin-left: auto;
-
 }
 
 .spinner {

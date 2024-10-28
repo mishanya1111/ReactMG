@@ -1,12 +1,12 @@
+import CustomDiv from './CustomDiv';
+
 function CardBody({ editing, checked, value, onChange }) {
     return editing ? (
-        <div className={checked ? 'yellowBox textDiv' : 'borderBox textDiv'}>
+        <CustomDiv $checked={checked}>
             <textarea onChange={onChange} className="textAreaBox" value={value} />
-        </div>
+        </CustomDiv>
     ) : (
-        <div className={checked ? 'yellowBox textDiv' : 'borderBox textDiv'}>
-            {value}
-        </div>
+        <CustomDiv $checked={checked}>{value}</CustomDiv>
     );
 }
 
