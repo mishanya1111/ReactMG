@@ -16,7 +16,6 @@ body {
     width: 70px;
     height: 70px;
 }
-
 .AppHeader {
     display: flex;
     justify-content: space-between;
@@ -24,6 +23,28 @@ body {
     width: 95%;
 }
 
+
+.headerLeft {
+    display: flex;
+    align-items: center;
+}
+
+.headerRight {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.borderBox {
+    padding: 20px;
+    border: white 1px solid;
+}
+
+.yellowBox {
+    padding: 20px;
+    border: yellow 1px solid;
+}
 
 .cardButton {
     width: 80px;
@@ -174,56 +195,134 @@ body {
     text-decoration: underline;
 }
 
-#sidebar {
-    width: 200px;
-    background-color: #3a3f47;
-    padding: 20px;
-    height: 100vh;
+
+.preloader {
     position: fixed;
-    top: 0;
     left: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #e0e0e0;
+    z-index: 1001;
 }
 
-#sidebar nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-}
-
-#sidebar nav ul li {
-    margin: 15px 0;
+.preloader__row {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 70px;
+    height: 70px;
+    margin-top: -35px;
+    margin-left: -35px;
     text-align: center;
+    animation: preloader-rotate 2s infinite linear;
 }
 
-#sidebar nav ul li a {
+.preloader__item {
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    background-color: #337ab7;
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    animation: preloader-bounce 2s infinite ease-in-out;
+}
+
+.preloader__item:last-child {
+    top: auto;
+    bottom: 0;
+    animation-delay: -1s;
+}
+
+@keyframes preloader-rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes preloader-bounce {
+
+    0%,
+    100% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+}
+
+.loaded_hiding .preloader {
+    transition: 0.3s opacity;
+    opacity: 0;
+}
+
+.loaded .preloader {
+    display: none;
+}
+
+
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #3a3f47;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 35px;
+}
+
+
+.navbar ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li {
+    margin: 0 15px;
+}
+
+.navbar a {
     color: #61dafb;
     text-decoration: none;
     font-size: 16px;
-    padding: 10px 15px;
-    display: block;
+    padding: 10px;
+    transition: background-color 0.3s, color 0.3s;
     border-radius: 4px;
-    transition: background-color 0.3s;
+
 }
 
-#sidebar nav ul li a:hover {
+.navbar a:hover {
     background-color: #505763;
 }
 
-#sidebar nav ul li a.active {
+.navbar a.active {
     background-color: #61dafb;
     color: #282c34;
     font-weight: bold;
 }
 
 #detail {
-    margin-left: 220px;
-    padding: 20px;
+    padding: 0 20px;
     background-color: #282c34;
     min-height: 100vh;
     color: white;
 }
+
+@media (max-width: 768px) {
+    .navbar ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    .navbar li {
+        margin: 10px 0;
+    }
+}
+

@@ -1,23 +1,33 @@
 import Card from './Card';
-import withLoadingDelay from '../hooks/withLoadingDelay';
+
 import { CardContext } from '../context/сardArrayContext';
 import { useContext } from 'react';
 
-const CardWithLoading = withLoadingDelay(Card);
 function CardList() {
-    const { items } = useContext(CardContext);
+    const { items, error, fetchingDate } = useContext(CardContext);
     return (
         <>
-            {items.map(card => (
-                <CardWithLoading
-                    //viewOnlyChecked={viewOnlyCheckBoxClick}
-                    firstTitle={card.title}
-                    firstText={card.text}
-                    key={card.id}
-                    id={card.id}
-                    //checkBoxChange={checkBoxChange}
-                />
-            ))}
+            {fetchingDate ? (
+                <div className="preloader">
+                    <div className="preloader__row">
+                        <div className="preloader__item"></div>
+                        <div className="preloader__item"></div>
+                    </div>
+                </div>
+            ) : (
+                <>
+                    {error && <h1 style={{ color: 'red' }}>{error.message}</h1>}
+                    {!error &&
+                        items.map(card => (
+                            <Card
+                                firstTitle={card.title}
+                                firstText={card.text}
+                                key={card.id}
+                                id={card.id}
+                            />
+                        ))}
+                </>
+            )}
         </>
     );
 }
