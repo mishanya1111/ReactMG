@@ -1,18 +1,50 @@
-import { createContext, useState } from 'react';
-import cardsData from '../data';
+import { createContext, useState, useEffect } from 'react';
+import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+
 export const CardContext = createContext({
     items: [],
     cardCheckBoxClick: () => {},
     viewOnlyCheckBoxClick: () => {},
     addNewCard: () => {},
     deleteSelectedCard: () => {},
-    viewOnly: false
+    viewOnly: false,
+    fetchingDate: false,
+    error: false
 });
 
 export default function CardContextProvider({ children }) {
     const [checked, setChecked] = useState(false);
-    const [data, setData] = useState(cardsData);
+    const [data, setData] = useState([]);
+    const [fetching, setFetching] = useState(false);
+    const [error, setError] = useState(undefined);
+
+    useEffect(() => {
+        setFetching(true);
+        async function fetchData() {
+            try {
+                const apiUrl =
+                    '22https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json';
+                const resp = await axios.get(apiUrl);
+                const allCards = resp.data;
+                const resData = allCards.slice(0, 15).map(el => {
+                    return {
+                        id: el.Number,
+                        title: el.Name,
+                        text: el.About,
+                        isActive: false
+                    };
+                });
+                setData(resData);
+            } catch (err) {
+                setError(err);
+                //alert(`The data was not fetch\nError message:${err.message}`);
+            } finally {
+                setFetching(false);
+            }
+        }
+        fetchData();
+    }, []);
 
     function changeActiveHandler(id) {
         setData(cards =>
@@ -53,7 +85,9 @@ export default function CardContextProvider({ children }) {
         viewOnlyCheckBoxClick: changeCheckboxApp,
         addNewCard: addNewCard,
         deleteSelectedCard: deleteHandler,
-        viewOnly: checked
+        viewOnly: checked,
+        fetchingDate: fetching,
+        error: error
     };
     return (
         <CardContext.Provider value={contextValue}>{children}</CardContext.Provider>
