@@ -1,12 +1,11 @@
-
 import './first.css';
-import React from "react";
+import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import NotFoundPage from './Pages/NotFoundPage';
 import Root from './сomponents/Root';
 import LoginPage from './Pages/LoginPage';
-import CardContextProvider from "./context/сardArrayContext";
-import CardsPage from "./Pages/CardsPage";
+import CardContextProvider from './context/сardArrayContext';
+import CardsPage from './Pages/CardsPage';
 
 const router = createBrowserRouter([
     {

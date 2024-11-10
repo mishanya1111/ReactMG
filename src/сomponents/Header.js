@@ -1,6 +1,6 @@
-import logo from "../logo.svg";
-import { useContext } from "react";
-import { CardContext } from "../context/сardArrayContext";
+import logo from '../logo.svg';
+import { useContext } from 'react';
+import { CardContext } from '../context/сardArrayContext';
 import styled from 'styled-components';
 const InputViewOnly = styled.input`
     &:hover {
@@ -25,9 +25,9 @@ export default function Header() {
 
             {!error && !fetchingDate && (
                 <div className="headerRight">
-                        <span className="badge" style={{ marginLeft: 10 }}>
-                            Count card: {items.length}
-                        </span>
+                    <span className="badge" style={{ marginLeft: 10 }}>
+                        Count card: {items.length}
+                    </span>
 
                     <div className="checkboxView">
                         <InputViewOnly
@@ -43,16 +43,11 @@ export default function Header() {
                         Add Card
                     </button>
 
-                    <button
-                        onClick={deleteSelectedCard}
-                        style={{ marginLeft: 10 }}
-                    >
+                    <button onClick={deleteSelectedCard} style={{ marginLeft: 10 }}>
                         Delete selected cards
                     </button>
                 </div>
             )}
         </header>
-
-    )
-
+    );
 }

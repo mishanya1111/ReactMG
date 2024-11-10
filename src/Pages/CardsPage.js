@@ -1,8 +1,6 @@
-
 import '../first.css';
 import CardList from '../сomponents/CardList';
-import Header from "../сomponents/Header";
-
+import Header from '../сomponents/Header';
 
 function CardsPage() {
     return (
