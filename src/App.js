@@ -1,66 +1,35 @@
-import logo from './logo.svg';
+
 import './first.css';
-import { useContext } from 'react';
-import CardList from './сomponents/CardList';
-import styled from 'styled-components';
-import { CardContext } from './context/сardArrayContext';
-const InputViewOnly = styled.input`
-    &:hover {
-        scale: 2;
+import React from "react";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import NotFoundPage from './Pages/NotFoundPage';
+import Root from './сomponents/Root';
+import LoginPage from './Pages/LoginPage';
+import CardContextProvider from "./context/сardArrayContext";
+import CardsPage from "./Pages/CardsPage";
+
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <Root />,
+        errorElement: <NotFoundPage />,
+        children: [
+            {
+                index: true,
+                element: <LoginPage />
+            },
+            {
+                path: 'cards',
+                element: <CardsPage />
+            }
+        ]
     }
-`;
+]);
 function App() {
-    const {
-        viewOnlyCheckBoxClick,
-        addNewCard,
-        deleteSelectedCard,
-        items,
-        error,
-        fetchingDate
-    } = useContext(CardContext);
-
     return (
-        <div>
-            <header className="AppHeader">
-                <div className="headerLeft">
-                    <img src={logo} className="AppLogo" alt="logo" />
-                    <h1>Some very informative title</h1>
-                </div>
-
-                {!error && !fetchingDate && (
-                    <div className="headerRight">
-                        <span className="badge" style={{ marginLeft: 10 }}>
-                            Count card: {items.length}
-                        </span>
-
-                        <div className="checkboxView">
-                            <InputViewOnly
-                                type="checkbox"
-                                onChange={viewOnlyCheckBoxClick}
-                                id="checboxView"
-                                className="checkboxView"
-                            />
-                            <label htmlFor="checboxView">View only</label>
-                        </div>
-
-                        <button onClick={addNewCard} style={{ marginLeft: 10 }}>
-                            Add Card
-                        </button>
-
-                        <button
-                            onClick={deleteSelectedCard}
-                            style={{ marginLeft: 10 }}
-                        >
-                            Delete selected cards
-                        </button>
-                    </div>
-                )}
-            </header>
-
-            <div className="cardContainer">
-                <CardList />
-            </div>
-        </div>
+        <CardContextProvider>
+            <RouterProvider router={router} />
+        </CardContextProvider>
     );
 }
 
