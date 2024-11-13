@@ -5,7 +5,8 @@ import NotFoundPage from './Pages/NotFoundPage';
 import Root from './сomponents/Root';
 import LoginPage from './Pages/LoginPage';
 import CardContextProvider from './context/сardArrayContext';
-import CardsPage from './Pages/CardsPage';
+import Home from './Pages/Home';
+import Main from './Pages/Main';
 
 const router = createBrowserRouter([
     {
@@ -15,11 +16,15 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
+                element: <Main />
+            },
+            {
+                path: 'login',
                 element: <LoginPage />
             },
             {
-                path: 'cards',
-                element: <CardsPage />
+                path: 'home',
+                element: <Home />
             }
         ]
     }

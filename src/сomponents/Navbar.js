@@ -7,7 +7,7 @@ export default function Navbar() {
                 <ul>
                     <li>
                         <NavLink
-                            to={`/`}
+                            to={`/login`}
                             end
                             className={({ isActive, isPending }) =>
                                 isActive ? 'active' : isPending ? 'pending' : ''
@@ -18,7 +18,7 @@ export default function Navbar() {
                     </li>
                     <li>
                         <NavLink
-                            to={`/cards`}
+                            to={`/home`}
                             className={({ isActive, isPending }) =>
                                 isActive ? 'active' : isPending ? 'pending' : ''
                             }

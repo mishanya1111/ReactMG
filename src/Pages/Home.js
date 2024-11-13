@@ -2,7 +2,7 @@ import '../first.css';
 import CardList from '../сomponents/CardList';
 import Header from '../сomponents/Header';
 
-function CardsPage() {
+function Home() {
     return (
         <div>
             <Header />
@@ -13,4 +13,4 @@ function CardsPage() {
     );
 }
 
-export default CardsPage;
+export default Home;
