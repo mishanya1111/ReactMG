@@ -18,7 +18,7 @@ export default function Navbar() {
                     </li>
                     <li>
                         <NavLink
-                            to={`/home`}
+                            to={`/`}
                             className={({ isActive, isPending }) =>
                                 isActive ? 'active' : isPending ? 'pending' : ''
                             }

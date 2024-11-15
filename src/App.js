@@ -6,7 +6,6 @@ import Root from './сomponents/Root';
 import LoginPage from './Pages/LoginPage';
 import CardContextProvider from './context/сardArrayContext';
 import Home from './Pages/Home';
-import Main from './Pages/Main';
 
 const router = createBrowserRouter([
     {
@@ -15,15 +14,11 @@ const router = createBrowserRouter([
         errorElement: <NotFoundPage />,
         children: [
             {
-                index: true,
-                element: <Main />
-            },
-            {
                 path: 'login',
                 element: <LoginPage />
             },
             {
-                path: 'home',
+                index: true,
                 element: <Home />
             }
         ]
