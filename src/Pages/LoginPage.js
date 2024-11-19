@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 function LoginPage() {
     let navigate = useNavigate();
     function redirectToCards() {
-        return navigate('/cards');
+        return navigate('/');
     }
     return (
         <div id="main-holder">
