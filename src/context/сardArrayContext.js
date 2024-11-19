@@ -24,7 +24,7 @@ export default function CardContextProvider({ children }) {
         async function fetchData() {
             try {
                 const apiUrl =
-                    '22https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json';
+                    'https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json';
                 const resp = await axios.get(apiUrl);
                 const allCards = resp.data;
                 const resData = allCards.slice(0, 15).map(el => {
