@@ -45,15 +45,20 @@ function LoginPage() {
             <h2>Login</h2>
             <form onSubmit={handleSubmit} id="login-form">
                 <CustomInput
+                    name='Email'
+                    //id='email'
                     type="text"
-                    placeholder="Username"
+                    placeholder="email"
                     value={values.username}
                     error={errors.username}
                     onChange={(e) => handleChange("username", e.target.value)}
                     onBlur={() => handleBlur("username")}
+
                 />
 
                 <CustomInput
+                    name='Password'
+                    //id='password'
                     type="password"
                     placeholder="Password"
                     error={errors.password}
@@ -63,7 +68,7 @@ function LoginPage() {
 
                 />
 
-                <button type="submit" disabled={!isValid}>
+                <button disabled={!isValid} type="submit" className={isValid ? '' : 'login-button' } >
                     Login
                 </button>
             </form>

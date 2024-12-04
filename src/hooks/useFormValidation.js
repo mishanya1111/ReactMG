@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState} from "react";
 
 const useFormValidation = (initialValues, validations) => {
     const [values, setValues] = useState(initialValues);
     const [errors, setErrors] = useState({});
     const [isTouched, setIsTouched] = useState({});
+    
 
     const validateField = (field, value) => {
         const validation = validations[field];
@@ -27,7 +28,9 @@ const useFormValidation = (initialValues, validations) => {
     };
 
     const isValid = Object.values(errors).every((error) => error === "") &&
-        Object.keys(validations).every((field) => values[field]);
+        Object.keys(validations).every((field) => values[field]) &&
+        (Object.keys(isTouched).length === Object.keys(values).length);
+
 
     return {
         values,
@@ -35,6 +38,7 @@ const useFormValidation = (initialValues, validations) => {
         isValid,
         handleChange,
         handleBlur,
+
     };
 };
 
