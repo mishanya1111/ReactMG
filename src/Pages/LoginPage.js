@@ -18,7 +18,7 @@ function LoginPage() {
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
         return passwordRegex.test(value)
             ? ""
-            : "Password must be at least 8 characters and include at least one letter and one number.";
+            : "Password must be at least 8 characters and include letter and number.";
     };
 
     // Инициализация хука useFormValidation
@@ -46,19 +46,19 @@ function LoginPage() {
             <form onSubmit={handleSubmit} id="login-form">
                 <CustomInput
                     name='Email'
-                    //id='email'
+
                     type="text"
                     placeholder="email"
                     value={values.username}
                     error={errors.username}
                     onChange={(e) => handleChange("username", e.target.value)}
                     onBlur={() => handleBlur("username")}
-
+                    isValid={isValid}
                 />
 
                 <CustomInput
                     name='Password'
-                    //id='password'
+                    isValid={isValid}
                     type="password"
                     placeholder="Password"
                     error={errors.password}
@@ -69,7 +69,7 @@ function LoginPage() {
                 />
 
                 <button disabled={!isValid} type="submit" className={isValid ? '' : 'login-button' } >
-                    Login
+                    {isValid ? 'Login' : 'Not valid'}
                 </button>
             </form>
         </div>

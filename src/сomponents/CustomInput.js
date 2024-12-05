@@ -1,6 +1,6 @@
 import React from "react";
 
-const CustomInput = ({name,
+const CustomInput = ({name, isValid,
                                  type,
                                  placeholder, error, ...props
                              }) => {
@@ -8,6 +8,7 @@ const CustomInput = ({name,
         <div className="input-with-validation">
             <label htmlFor={name}> {name}</label>
             <input
+                className={error === '' ? '' : 'input-error'}
                 name={name}
                 type={type}
                 placeholder={placeholder}
