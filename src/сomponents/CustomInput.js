@@ -8,7 +8,7 @@ const CustomInput = ({name, isValid,
         <div className="input-with-validation">
             <label htmlFor={name}> {name}</label>
             <input
-                className={error === '' ? '' : 'input-error'}
+                className={(error === '') || !error ? '' : 'input-error'}
                 name={name}
                 type={type}
                 placeholder={placeholder}

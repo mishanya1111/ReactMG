@@ -69,7 +69,7 @@ function LoginPage() {
                 />
 
                 <button disabled={!isValid} type="submit" className={isValid ? '' : 'login-button' } >
-                    {isValid ? 'Login' : 'Not valid'}
+                    Login
                 </button>
             </form>
         </div>
