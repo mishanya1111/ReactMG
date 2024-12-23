@@ -1,21 +1,22 @@
 import logo from '../logo.svg';
-import { useContext } from 'react';
-import { CardContext } from '../context/сardArrayContext';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import {
+    addNewCard,
+    deleteHandler,
+    changeViewMode
+} from '../store/cardArraySlice';
+
 const InputViewOnly = styled.input`
-    &:hover {
-        scale: 2;
-    }
+  &:hover {
+    scale: 2;
+  }
 `;
+
 export default function Header() {
-    const {
-        viewOnlyCheckBoxClick,
-        addNewCard,
-        deleteSelectedCard,
-        items,
-        error,
-        fetchingDate
-    } = useContext(CardContext);
+    const dispatch = useDispatch();
+    const { cards, viewOnlyMod, error } = useSelector((state) => state.counter);
+
     return (
         <header className="AppHeader">
             <div className="headerLeft">
@@ -23,27 +24,34 @@ export default function Header() {
                 <h1>Some very informative title</h1>
             </div>
 
-            {!error && !fetchingDate && (
+            {!error && (
                 <div className="headerRight">
                     <span className="badge" style={{ marginLeft: 10 }}>
-                        Count card: {items.length}
+                        Count card: {cards.length}
                     </span>
 
                     <div className="checkboxView">
                         <InputViewOnly
                             type="checkbox"
-                            onChange={viewOnlyCheckBoxClick}
+                            onChange={() => dispatch(changeViewMode())}
                             id="checboxView"
                             className="checkboxView"
+                            checked={viewOnlyMod}
                         />
                         <label htmlFor="checboxView">View only</label>
                     </div>
 
-                    <button onClick={addNewCard} style={{ marginLeft: 10 }}>
+                    <button
+                        onClick={() => dispatch(addNewCard())}
+                        style={{ marginLeft: 10 }}
+                    >
                         Add Card
                     </button>
 
-                    <button onClick={deleteSelectedCard} style={{ marginLeft: 10 }}>
+                    <button
+                        onClick={() => dispatch(deleteHandler())}
+                        style={{ marginLeft: 10 }}
+                    >
                         Delete selected cards
                     </button>
                 </div>

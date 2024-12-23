@@ -22,6 +22,7 @@ const cardArraySlice = createSlice({
         changeActiveById: (state, action) => {
             state.cards = state.cards.map(card => {
                     if (card.id === action.payload) {
+                        console.log(card.id);
                         const prev = { ...card };
                         prev.isActive = !card.isActive;
                         return prev;
@@ -31,8 +32,9 @@ const cardArraySlice = createSlice({
             );
         },
         deleteHandler: (state, action) => {
-            state.cards = state.cards.filter((item) => item.id !== action.payload);
-        },
+            console.log(state.cards);
+            state.cards = state.cards.filter((item) => !item.isActive);
+            console.log(state.cards);        },
         changeViewMode: (state) => {
             state.viewOnlyMod = !state.viewOnlyMod;
         }

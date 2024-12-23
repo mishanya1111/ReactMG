@@ -1,32 +1,22 @@
 import Card from './Card';
-
-import { CardContext } from '../context/сardArrayContext';
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 
 function CardList() {
-    const { items, error, fetchingDate } = useContext(CardContext);
+    const { cards, error } = useSelector((state) => state.counter);
+
     return (
         <>
-            {fetchingDate ? (
-                <div className="preloader">
-                    <div className="preloader__row">
-                        <div className="preloader__item"></div>
-                        <div className="preloader__item"></div>
-                    </div>
-                </div>
+            {error ? (
+                <h1 style={{ color: 'red' }}>{error.message}</h1>
             ) : (
-                <>
-                    {error && <h1 style={{ color: 'red' }}>{error.message}</h1>}
-                    {!error &&
-                        items.map(card => (
-                            <Card
-                                firstTitle={card.title}
-                                firstText={card.text}
-                                key={card.id}
-                                id={card.id}
-                            />
-                        ))}
-                </>
+                cards.map((card) => (
+                    <Card
+                        firstTitle={card.title}
+                        firstText={card.text}
+                        key={card.id}
+                        id={card.id}
+                    />
+                ))
             )}
         </>
     );

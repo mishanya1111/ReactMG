@@ -6,6 +6,9 @@ import Root from './сomponents/Root';
 import LoginPage from './Pages/LoginPage';
 import CardContextProvider from './context/сardArrayContext';
 import Home from './Pages/Home';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
+import CardDetailPage from "./Pages/CardDetailPage";
 
 const router = createBrowserRouter([
     {
@@ -20,15 +23,19 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <Home />
+            },
+            {
+                path: 'card/:id',
+                element: <CardDetailPage />
             }
         ]
     }
 ]);
 function App() {
     return (
-        <CardContextProvider>
+        <Provider store={store}>
             <RouterProvider router={router} />
-        </CardContextProvider>
+        </Provider>
     );
 }
 

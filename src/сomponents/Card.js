@@ -1,25 +1,27 @@
-import '../first.css';
-import { useState, useEffect, useContext } from 'react';
-import { CardContext } from '../context/сardArrayContext';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+    changeActiveById
+} from '../store/cardArraySlice';
 import CardHeader from './CardHeader';
 import CardBody from './CardBody';
 import PropTypes from 'prop-types';
+import { useNavigate } from "react-router-dom";
 
 function Card({ firstTitle, firstText, id }) {
-    const [checked, setChecked] = useState(false);
+    const dispatch = useDispatch();
+    const { viewOnlyMod } = useSelector((state) => state.counter);
+
     const [editing, setEditing] = useState(false);
     const [title, setTitle] = useState(firstTitle);
     const [text, setText] = useState(firstText);
-    const [saveText, setSaveText] = useState(firstText);
-    const [saveTitle, setSaveTitle] = useState(firstTitle);
-    const { viewOnly, cardCheckBoxClick } = useContext(CardContext);
-    useEffect(() => {
-        cancelButton();
-    }, [viewOnly]);
+    const navigate = useNavigate();
 
+    const handleDoubleClick = () => {
+        navigate(`/card/${id}`);
+    };
     function changeCheckbox() {
-        setChecked(check => !check);
-        cardCheckBoxClick(id);
+        dispatch(changeActiveById(id));
     }
 
     function titleChangeHandler(event) {
@@ -30,46 +32,32 @@ function Card({ firstTitle, firstText, id }) {
         setText(event.target.value);
     }
 
-    function setSaveInf() {
-        setSaveTitle(title);
-        setSaveText(text);
-    }
-
     function submitHandler() {
         setEditing(false);
-        setSaveInf();
     }
 
     function cancelButton() {
-        setTitle(saveTitle);
-        setText(saveText);
         setEditing(false);
     }
 
     function editingHandler() {
-        setSaveInf();
-        if (checked) {
-            changeCheckbox();
-        }
         setEditing(true);
     }
 
     return (
-        <div className="card">
+        <div className="card" onDoubleClick={handleDoubleClick}>
             <CardHeader
                 value={title}
                 inputChange={titleChangeHandler}
                 onCansel={cancelButton}
                 onSave={submitHandler}
                 onChange={changeCheckbox}
-                checked={checked}
                 editing={editing}
-                isDisableMode={viewOnly}
+                isDisableMode={viewOnlyMod}
                 onEdit={editingHandler}
             />
             <CardBody
                 editing={editing}
-                checked={checked}
                 value={text}
                 onChange={textChangeHandler}
             />
@@ -82,4 +70,5 @@ Card.propTypes = {
     firstText: PropTypes.string,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
 };
+
 export default Card;
