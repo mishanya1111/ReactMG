@@ -1,19 +1,19 @@
-import { MdOutlineCancel } from "react-icons/md";
-import { FaSave } from "react-icons/fa";
-import { AiOutlineEdit } from "react-icons/ai";
-import CustomDiv from "./CustomDiv";
+import { MdOutlineCancel } from 'react-icons/md';
+import { FaSave } from 'react-icons/fa';
+import { AiOutlineEdit } from 'react-icons/ai';
+import CustomDiv from './CustomDiv';
 
 function CardHeader({
-                        value,
-                        inputChange,
-                        onCancel,
-                        onSave,
-                        onChange,
-                        onEdit,
-                        isActive,
-                        editing,
-                        isDisableMode,
-                    }) {
+    value,
+    inputChange,
+    onCancel,
+    onSave,
+    onChange,
+    onEdit,
+    isActive,
+    editing,
+    isDisableMode
+}) {
     return editing ? (
         <CustomDiv $checked={isActive} $title={true}>
             <h2>

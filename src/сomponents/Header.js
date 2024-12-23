@@ -1,21 +1,17 @@
 import logo from '../logo.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import {
-    addNewCard,
-    deleteHandler,
-    changeViewMode
-} from '../store/cardArraySlice';
+import { addNewCard, deleteHandler, changeViewMode } from '../store/cardArraySlice';
 
 const InputViewOnly = styled.input`
-  &:hover {
-    scale: 2;
-  }
+    &:hover {
+        scale: 2;
+    }
 `;
 
 export default function Header() {
     const dispatch = useDispatch();
-    const { cards, viewOnlyMod, error } = useSelector((state) => state.counter);
+    const { cards, viewOnlyMod, error } = useSelector(state => state.counter);
 
     return (
         <header className="AppHeader">

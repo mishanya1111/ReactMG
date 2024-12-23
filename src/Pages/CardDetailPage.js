@@ -1,18 +1,18 @@
-import { useParams, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
-import { updateCard } from "../store/cardArraySlice";
+import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { updateCard } from '../store/cardArraySlice';
 
 export default function CardDetailPage() {
     const { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const card = useSelector((state) =>
-        state.counter.cards.find((card) => card.id === id)
+    const card = useSelector(state =>
+        state.counter.cards.find(card => card.id === id)
     );
 
-    const [title, setTitle] = useState(card?.title || "");
-    const [text, setText] = useState(card?.text || "");
+    const [title, setTitle] = useState(card?.title || '');
+    const [text, setText] = useState(card?.text || '');
 
     if (!card) {
         return <h1 className="not-found">Card not found</h1>;
@@ -20,7 +20,7 @@ export default function CardDetailPage() {
 
     const saveHandler = () => {
         dispatch(updateCard({ id, title, text }));
-        navigate("/");
+        navigate('/');
     };
 
     return (
@@ -33,7 +33,7 @@ export default function CardDetailPage() {
                         <input
                             type="text"
                             value={title}
-                            onChange={(e) => setTitle(e.target.value)}
+                            onChange={e => setTitle(e.target.value)}
                             className="detail-input"
                         />
                     </label>
@@ -43,7 +43,7 @@ export default function CardDetailPage() {
                         Text:
                         <textarea
                             value={text}
-                            onChange={(e) => setText(e.target.value)}
+                            onChange={e => setText(e.target.value)}
                             className="detail-textarea"
                         />
                     </label>
@@ -53,7 +53,7 @@ export default function CardDetailPage() {
                         Save
                     </button>
                     <button
-                        onClick={() => navigate("/")}
+                        onClick={() => navigate('/')}
                         className="detail-button cancel"
                     >
                         Cancel

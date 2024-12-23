@@ -1,16 +1,16 @@
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { changeActiveById, updateCard, resetActive } from "../store/cardArraySlice";
-import CardHeader from "./CardHeader";
-import CardBody from "./CardBody";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeActiveById, updateCard, resetActive } from '../store/cardArraySlice';
+import CardHeader from './CardHeader';
+import CardBody from './CardBody';
+import { useNavigate } from 'react-router-dom';
 
 function Card({ firstTitle, firstText, id }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { viewOnlyMod } = useSelector((state) => state.counter);
-    const card = useSelector((state) =>
-        state.counter.cards.find((card) => card.id === id)
+    const { viewOnlyMod } = useSelector(state => state.counter);
+    const card = useSelector(state =>
+        state.counter.cards.find(card => card.id === id)
     );
 
     const [editing, setEditing] = useState(false);
@@ -45,8 +45,8 @@ function Card({ firstTitle, firstText, id }) {
         setEditing(false);
     };
 
-    const handleTitleChange = (e) => setTitle(e.target.value);
-    const handleTextChange = (e) => setText(e.target.value);
+    const handleTitleChange = e => setTitle(e.target.value);
+    const handleTextChange = e => setText(e.target.value);
 
     return (
         <div className="card" onDoubleClick={handleDoubleClick}>
@@ -70,6 +70,5 @@ function Card({ firstTitle, firstText, id }) {
         </div>
     );
 }
-
 
 export default Card;

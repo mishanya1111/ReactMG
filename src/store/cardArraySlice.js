@@ -1,6 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { v4 as uuidv4 } from "uuid";
-
+import { createSlice } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
 
 const initalDate = {
     viewOnlyMod: false,
@@ -10,33 +9,32 @@ const initalDate = {
 };
 
 const cardArraySlice = createSlice({
-    name: "counter",
+    name: 'counter',
     initialState: initalDate,
     reducers: {
-        addNewCard: (state) => {
+        addNewCard: state => {
             state.cards.push({
                 id: uuidv4(),
-                title: "",
-                text: "",
+                title: '',
+                text: '',
                 isActive: false
             });
         },
         changeActiveById: (state, action) => {
             state.cards = state.cards.map(card => {
-                    if (card.id === action.payload) {
-                        console.log(card.id);
-                        const prev = { ...card };
-                        prev.isActive = !card.isActive;
-                        return prev;
-                    }
-                    return card;
+                if (card.id === action.payload) {
+                    console.log(card.id);
+                    const prev = { ...card };
+                    prev.isActive = !card.isActive;
+                    return prev;
                 }
-            );
+                return card;
+            });
         },
-        deleteHandler: (state) => {
-            state.cards = state.cards.filter((item) => !item.isActive);
+        deleteHandler: state => {
+            state.cards = state.cards.filter(item => !item.isActive);
         },
-        changeViewMode: (state) => {
+        changeViewMode: state => {
             state.viewOnlyMod = !state.viewOnlyMod;
         },
         setCards: (state, action) => {
@@ -48,27 +46,29 @@ const cardArraySlice = createSlice({
         setLoading: (state, action) => {
             state.loading = action.payload;
         },
-        updateCard : (state, action) => {
+        updateCard: (state, action) => {
             const { id, title, text } = action.payload;
-            const card = state.cards.find((card) => card.id === id);
+            const card = state.cards.find(card => card.id === id);
             if (card) {
                 card.title = title;
                 card.text = text;
             }
         },
-        resetActive: (state, action) =>{
-            const card = state.cards.find((card) => card.id === action.payload);
+        resetActive: (state, action) => {
+            const card = state.cards.find(card => card.id === action.payload);
             if (card) {
                 card.isActive = false;
             }
-        },
+        }
     }
-
-
 });
 
 export const {
-    addNewCard, deleteHandler, changeViewMode, changeActiveById, setCards,
+    addNewCard,
+    deleteHandler,
+    changeViewMode,
+    changeActiveById,
+    setCards,
     setError,
     setLoading,
     resetActive,

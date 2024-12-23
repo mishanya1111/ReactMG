@@ -2,14 +2,14 @@ import Card from './Card';
 import { useSelector } from 'react-redux';
 
 function CardList() {
-    const { cards, error } = useSelector((state) => state.counter);
+    const { cards, error } = useSelector(state => state.counter);
 
     return (
         <>
             {error ? (
                 <h1 style={{ color: 'red' }}>{error.message}</h1>
             ) : (
-                cards.map((card) => (
+                cards.map(card => (
                     <Card
                         firstTitle={card.title}
                         firstText={card.text}
