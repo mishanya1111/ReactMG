@@ -1,23 +1,24 @@
-import './first.css';
-import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import NotFoundPage from './Pages/NotFoundPage';
-import Root from './сomponents/Root';
-import LoginPage from './Pages/LoginPage';
-import CardContextProvider from './context/сardArrayContext';
-import Home from './Pages/Home';
-import { Provider } from 'react-redux';
-import { store } from './store/store';
+import "./first.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import NotFoundPage from "./Pages/NotFoundPage";
+import Root from "./сomponents/Root";
+import LoginPage from "./Pages/LoginPage";
+
+import Home from "./Pages/Home";
 import CardDetailPage from "./Pages/CardDetailPage";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { loadCards } from "./store/loadCards";
+
 
 const router = createBrowserRouter([
     {
-        path: '/',
+        path: "/",
         element: <Root />,
         errorElement: <NotFoundPage />,
         children: [
             {
-                path: 'login',
+                path: "login",
                 element: <LoginPage />
             },
             {
@@ -25,17 +26,22 @@ const router = createBrowserRouter([
                 element: <Home />
             },
             {
-                path: 'card/:id',
+                path: "card/:id",
                 element: <CardDetailPage />
             }
         ]
     }
 ]);
+
 function App() {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(loadCards());
+    }, [dispatch]);
+
     return (
-        <Provider store={store}>
-            <RouterProvider router={router} />
-        </Provider>
+        <RouterProvider router={router} />
     );
 }
 

@@ -3,6 +3,7 @@ import CardList from '../сomponents/CardList';
 import Header from '../сomponents/Header';
 
 function Home() {
+
     return (
         <div>
             <Header />

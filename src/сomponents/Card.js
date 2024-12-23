@@ -1,74 +1,75 @@
-import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-    changeActiveById
-} from '../store/cardArraySlice';
-import CardHeader from './CardHeader';
-import CardBody from './CardBody';
-import PropTypes from 'prop-types';
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { changeActiveById, updateCard, resetActive } from "../store/cardArraySlice";
+import CardHeader from "./CardHeader";
+import CardBody from "./CardBody";
 import { useNavigate } from "react-router-dom";
 
 function Card({ firstTitle, firstText, id }) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { viewOnlyMod } = useSelector((state) => state.counter);
+    const card = useSelector((state) =>
+        state.counter.cards.find((card) => card.id === id)
+    );
 
     const [editing, setEditing] = useState(false);
     const [title, setTitle] = useState(firstTitle);
     const [text, setText] = useState(firstText);
-    const navigate = useNavigate();
 
     const handleDoubleClick = () => {
         navigate(`/card/${id}`);
     };
-    function changeCheckbox() {
-        dispatch(changeActiveById(id));
-    }
 
-    function titleChangeHandler(event) {
-        setTitle(event.target.value);
-    }
+    const handleCheckboxChange = () => {
+        if (!editing) {
+            dispatch(changeActiveById(id));
+        }
+    };
 
-    function textChangeHandler(event) {
-        setText(event.target.value);
-    }
-
-    function submitHandler() {
-        setEditing(false);
-    }
-
-    function cancelButton() {
-        setEditing(false);
-    }
-
-    function editingHandler() {
+    const handleEdit = () => {
+        if (card.isActive) {
+            dispatch(resetActive(id));
+        }
         setEditing(true);
-    }
+    };
+
+    const handleCancel = () => {
+        setTitle(card.title);
+        setText(card.text);
+        setEditing(false);
+    };
+
+    const handleSave = () => {
+        dispatch(updateCard({ id, title, text }));
+        setEditing(false);
+    };
+
+    const handleTitleChange = (e) => setTitle(e.target.value);
+    const handleTextChange = (e) => setText(e.target.value);
 
     return (
         <div className="card" onDoubleClick={handleDoubleClick}>
             <CardHeader
                 value={title}
-                inputChange={titleChangeHandler}
-                onCansel={cancelButton}
-                onSave={submitHandler}
-                onChange={changeCheckbox}
+                inputChange={handleTitleChange}
+                onCancel={handleCancel}
+                onSave={handleSave}
+                onChange={handleCheckboxChange}
+                isActive={card.isActive}
                 editing={editing}
                 isDisableMode={viewOnlyMod}
-                onEdit={editingHandler}
+                onEdit={handleEdit}
             />
             <CardBody
                 editing={editing}
                 value={text}
-                onChange={textChangeHandler}
+                onChange={handleTextChange}
+                checked={card.isActive}
             />
         </div>
     );
 }
 
-Card.propTypes = {
-    firstTitle: PropTypes.string,
-    firstText: PropTypes.string,
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
-};
 
 export default Card;

@@ -1,21 +1,21 @@
-import { MdOutlineCancel } from 'react-icons/md';
-import { FaSave } from 'react-icons/fa';
-import { AiOutlineEdit } from 'react-icons/ai';
-import CustomDiv from './CustomDiv';
+import { MdOutlineCancel } from "react-icons/md";
+import { FaSave } from "react-icons/fa";
+import { AiOutlineEdit } from "react-icons/ai";
+import CustomDiv from "./CustomDiv";
 
 function CardHeader({
-    value,
-    inputChange,
-    onCansel,
-    onSave,
-    onChange,
-    onEdit,
-    checked,
-    editing,
-    isDisableMode
-}) {
+                        value,
+                        inputChange,
+                        onCancel,
+                        onSave,
+                        onChange,
+                        onEdit,
+                        isActive,
+                        editing,
+                        isDisableMode,
+                    }) {
     return editing ? (
-        <CustomDiv $checked={checked} $title={true}>
+        <CustomDiv $checked={isActive} $title={true}>
             <h2>
                 <input
                     type="text"
@@ -24,7 +24,7 @@ function CardHeader({
                     style={{ width: 110 }}
                 />
             </h2>
-            <button onClick={onCansel} className="cancelButton">
+            <button onClick={onCancel} className="cancelButton">
                 Cancel
                 <MdOutlineCancel />
             </button>
@@ -34,9 +34,15 @@ function CardHeader({
             </button>
         </CustomDiv>
     ) : (
-        <CustomDiv $checked={checked} $title={true}>
+        <CustomDiv $checked={isActive} $title={true}>
             <h2>{value}</h2>
-            <input type="checkbox" className="check1" onChange={onChange} />
+            <input
+                type="checkbox"
+                className="check1"
+                onChange={onChange}
+                checked={isActive}
+                disabled={editing}
+            />
             <div style={{ width: 80 }}>
                 {!isDisableMode && (
                     <button onClick={onEdit} className="cardButton">

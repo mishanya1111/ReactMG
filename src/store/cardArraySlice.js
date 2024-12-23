@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 
+
 const initalDate = {
     viewOnlyMod: false,
     cards: [],
-    error: undefined,
+    error: null,
     value: 0
 };
+
 const cardArraySlice = createSlice({
     name: "counter",
     initialState: initalDate,
@@ -31,15 +33,45 @@ const cardArraySlice = createSlice({
                 }
             );
         },
-        deleteHandler: (state, action) => {
-            console.log(state.cards);
+        deleteHandler: (state) => {
             state.cards = state.cards.filter((item) => !item.isActive);
-            console.log(state.cards);        },
+        },
         changeViewMode: (state) => {
             state.viewOnlyMod = !state.viewOnlyMod;
-        }
+        },
+        setCards: (state, action) => {
+            state.cards = action.payload;
+        },
+        setError: (state, action) => {
+            state.error = action.payload;
+        },
+        setLoading: (state, action) => {
+            state.loading = action.payload;
+        },
+        updateCard : (state, action) => {
+            const { id, title, text } = action.payload;
+            const card = state.cards.find((card) => card.id === id);
+            if (card) {
+                card.title = title;
+                card.text = text;
+            }
+        },
+        resetActive: (state, action) =>{
+            const card = state.cards.find((card) => card.id === action.payload);
+            if (card) {
+                card.isActive = false;
+            }
+        },
     }
+
+
 });
 
-export const { addNewCard, deleteHandler, changeViewMode, changeActiveById } = cardArraySlice.actions;
+export const {
+    addNewCard, deleteHandler, changeViewMode, changeActiveById, setCards,
+    setError,
+    setLoading,
+    resetActive,
+    updateCard
+} = cardArraySlice.actions;
 export default cardArraySlice.reducer;

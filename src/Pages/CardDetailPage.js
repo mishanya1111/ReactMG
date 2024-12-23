@@ -1,7 +1,7 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { useState } from 'react';
-import { changeActiveById } from '../store/cardArraySlice';
+import { useParams, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+import { updateCard } from "../store/cardArraySlice";
 
 export default function CardDetailPage() {
     const { id } = useParams();
@@ -11,47 +11,55 @@ export default function CardDetailPage() {
         state.counter.cards.find((card) => card.id === id)
     );
 
-    const [title, setTitle] = useState(card?.title || '');
-    const [text, setText] = useState(card?.text || '');
+    const [title, setTitle] = useState(card?.title || "");
+    const [text, setText] = useState(card?.text || "");
 
     if (!card) {
-        return <h1>Card not found</h1>;
+        return <h1 className="not-found">Card not found</h1>;
     }
 
     const saveHandler = () => {
-        dispatch(
-            changeActiveById({
-                id,
-                changes: { title, text }
-            })
-        );
-        navigate('/');
+        dispatch(updateCard({ id, title, text }));
+        navigate("/");
     };
 
     return (
-        <div>
-            <h1>Card Details</h1>
-            <div>
-                <label>
-                    Title:
-                    <input
-                        type="text"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                    />
-                </label>
+        <div id="detail-card-page">
+            <div className="detail-container">
+                <h1>Card Details</h1>
+                <div className="detail-field">
+                    <label>
+                        Title:
+                        <input
+                            type="text"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            className="detail-input"
+                        />
+                    </label>
+                </div>
+                <div className="detail-field">
+                    <label>
+                        Text:
+                        <textarea
+                            value={text}
+                            onChange={(e) => setText(e.target.value)}
+                            className="detail-textarea"
+                        />
+                    </label>
+                </div>
+                <div className="detail-buttons">
+                    <button onClick={saveHandler} className="detail-button save">
+                        Save
+                    </button>
+                    <button
+                        onClick={() => navigate("/")}
+                        className="detail-button cancel"
+                    >
+                        Cancel
+                    </button>
+                </div>
             </div>
-            <div>
-                <label>
-                    Text:
-                    <textarea
-                        value={text}
-                        onChange={(e) => setText(e.target.value)}
-                    />
-                </label>
-            </div>
-            <button onClick={saveHandler}>Save</button>
-            <button onClick={() => navigate('/')}>Cancel</button>
         </div>
     );
 }
