@@ -5,6 +5,7 @@ const initalDate = {
     viewOnlyMod: false,
     cards: [],
     error: null,
+    loading: false,
     value: 0
 };
 
