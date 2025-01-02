@@ -24,7 +24,6 @@ const cardArraySlice = createSlice({
         changeActiveById: (state, action) => {
             state.cards = state.cards.map(card => {
                 if (card.id === action.payload) {
-                    console.log(card.id);
                     const prev = { ...card };
                     prev.isActive = !card.isActive;
                     return prev;
