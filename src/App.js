@@ -1,11 +1,14 @@
 import './first.css';
-import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import NotFoundPage from './Pages/NotFoundPage';
 import Root from './сomponents/Root';
 import LoginPage from './Pages/LoginPage';
-import CardContextProvider from './context/сardArrayContext';
+
 import Home from './Pages/Home';
+import CardDetailPage from './Pages/CardDetailPage';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { loadCards } from './store/loadCards';
 
 const router = createBrowserRouter([
     {
@@ -20,16 +23,23 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <Home />
+            },
+            {
+                path: 'card/:id',
+                element: <CardDetailPage />
             }
         ]
     }
 ]);
+
 function App() {
-    return (
-        <CardContextProvider>
-            <RouterProvider router={router} />
-        </CardContextProvider>
-    );
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(loadCards());
+    }, [dispatch]);
+
+    return <RouterProvider router={router} />;
 }
 
 export default App;
