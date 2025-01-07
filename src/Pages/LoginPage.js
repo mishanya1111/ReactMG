@@ -2,10 +2,12 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useFormValidation from '../hooks/useFormValidation';
 import CustomInput from '../сomponents/CustomInput';
-
+import { useDispatch, useSelector } from "react-redux";
+import { logIn } from "../store/authenticationSlice";
 function LoginPage() {
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
+    //const { role } = useSelector(state => state.authentication);
     // Валидационные функции
     const validateEmail = value => {
         if (!value) return 'Email is required.';
@@ -36,6 +38,7 @@ function LoginPage() {
     const handleSubmit = e => {
         e.preventDefault();
         if (isValid) {
+            dispatch(logIn({username: values.username , password: values.password }));
             navigate('/');
         }
     };

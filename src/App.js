@@ -9,6 +9,7 @@ import CardDetailPage from './Pages/CardDetailPage';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { loadCards } from './store/loadCards';
+import { setFromLocalStorage } from "./store/authenticationSlice";
 
 const router = createBrowserRouter([
     {
@@ -34,8 +35,8 @@ const router = createBrowserRouter([
 
 function App() {
     const dispatch = useDispatch();
-
     useEffect(() => {
+        dispatch(setFromLocalStorage());
         dispatch(loadCards());
     }, [dispatch]);
 
