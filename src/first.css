@@ -280,7 +280,7 @@ body {
 
 .navbar {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
     background-color: #3a3f47;
@@ -322,7 +322,9 @@ body {
     background-color: #61dafb;
     color: #282c34;
     font-weight: bold;
-}
+}.navbar-username{
+     color: #61dafb;
+ }
 
 #detail {
     padding: 0 20px;
@@ -361,7 +363,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 400px;
     text-align: center;
-    height: 370px;
 }
 
 .detail-container h1 {
