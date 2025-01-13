@@ -7,10 +7,9 @@ export default function CardDetailPage() {
     const { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const card = useSelector(state =>
-        state.counter.cards.find(card => card.id === id)
-    );
 
+    const { cards, viewOnlyMod } = useSelector(state => state.counter);
+    const card = cards.find(card => card.id === id);
     const [title, setTitle] = useState(card?.title || '');
     const [text, setText] = useState(card?.text || '');
 
@@ -30,35 +29,45 @@ export default function CardDetailPage() {
                 <div className="detail-field">
                     <label>
                         Title:
-                        <input
-                            type="text"
-                            value={title}
-                            onChange={e => setTitle(e.target.value)}
-                            className="detail-input"
-                        />
+                        {viewOnlyMod ? (
+                            <div> {title}</div>
+                        ) : (
+                            <input
+                                type="text"
+                                value={title}
+                                onChange={e => setTitle(e.target.value)}
+                                className="detail-input"
+                            />
+                        )}
                     </label>
                 </div>
                 <div className="detail-field">
                     <label>
                         Text:
-                        <textarea
-                            value={text}
-                            onChange={e => setText(e.target.value)}
-                            className="detail-textarea"
-                        />
+                        {viewOnlyMod ? (
+                            <div> {text}</div>
+                        ) : (
+                            <textarea
+                                value={text}
+                                onChange={e => setText(e.target.value)}
+                                className="detail-textarea"
+                            />
+                        )}
                     </label>
                 </div>
-                <div className="detail-buttons">
-                    <button onClick={saveHandler} className="detail-button save">
-                        Save
-                    </button>
-                    <button
-                        onClick={() => navigate('/')}
-                        className="detail-button cancel"
-                    >
-                        Cancel
-                    </button>
-                </div>
+                {!viewOnlyMod && (
+                    <div className="detail-buttons">
+                        <button onClick={saveHandler} className="detail-button save">
+                            Save
+                        </button>
+                        <button
+                            onClick={() => navigate('/')}
+                            className="detail-button cancel"
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                )}
             </div>
         </div>
     );

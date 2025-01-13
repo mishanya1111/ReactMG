@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import cardArraySlice from './cardArraySlice';
 import { thunk } from 'redux-thunk';
+import authenticationSlice from './authenticationSlice';
 
 const actionLogger = store => next => action => {
     console.log('Dispatching action:', action.type);
@@ -14,8 +15,10 @@ const actionLogger = store => next => action => {
 
 export const store = configureStore({
     reducer: {
-        counter: cardArraySlice
+        counter: cardArraySlice,
+        authentication: authenticationSlice
     },
-    middleware: getDefaultMiddleware =>
+  middleware: getDefaultMiddleware =>
         getDefaultMiddleware().concat(thunk, actionLogger)
+
 });

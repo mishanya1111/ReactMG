@@ -1,18 +1,10 @@
 import logo from '../logo.svg';
 import { useSelector, useDispatch } from 'react-redux';
-import styled from 'styled-components';
-import { addNewCard, deleteHandler, changeViewMode } from '../store/cardArraySlice';
-
-const InputViewOnly = styled.input`
-    &:hover {
-        scale: 2;
-    }
-`;
+import { addNewCard, deleteHandler } from '../store/cardArraySlice';
 
 export default function Header() {
     const dispatch = useDispatch();
-    const { cards, viewOnlyMod, error } = useSelector(state => state.counter);
-
+    const { cards, error } = useSelector(state => state.counter);
     return (
         <header className="AppHeader">
             <div className="headerLeft">
@@ -25,8 +17,7 @@ export default function Header() {
                     <span className="badge" style={{ marginLeft: 10 }}>
                         Count card: {cards.length}
                     </span>
-
-                    <div className="checkboxView">
+                    {/*<div className="checkboxView">
                         <InputViewOnly
                             type="checkbox"
                             onChange={() => dispatch(changeViewMode())}
@@ -35,7 +26,7 @@ export default function Header() {
                             checked={viewOnlyMod}
                         />
                         <label htmlFor="checboxView">View only</label>
-                    </div>
+                    </div>*/}
 
                     <button
                         onClick={() => dispatch(addNewCard())}

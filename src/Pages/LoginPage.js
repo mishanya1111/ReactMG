@@ -2,11 +2,11 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useFormValidation from '../hooks/useFormValidation';
 import CustomInput from '../сomponents/CustomInput';
-
+import { useDispatch } from 'react-redux';
+import { logIn } from '../store/authenticationSlice';
 function LoginPage() {
     const navigate = useNavigate();
-
-    // Валидационные функции
+    const dispatch = useDispatch();
     const validateEmail = value => {
         if (!value) return 'Email is required.';
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -21,7 +21,6 @@ function LoginPage() {
             : 'Password must be at least 8 characters and include letter and number.';
     };
 
-    // Инициализация хука useFormValidation
     const { values, errors, isValid, handleChange, handleBlur } = useFormValidation(
         {
             username: '',
@@ -36,6 +35,9 @@ function LoginPage() {
     const handleSubmit = e => {
         e.preventDefault();
         if (isValid) {
+            dispatch(
+                logIn({ username: values.username, password: values.password })
+            );
             navigate('/');
         }
     };

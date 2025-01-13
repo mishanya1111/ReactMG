@@ -9,6 +9,8 @@ import CardDetailPage from './Pages/CardDetailPage';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { loadCards } from './store/loadCards';
+import { setFromLocalStorage } from './store/authenticationSlice';
+import Settings from './Pages/Settings';
 
 const router = createBrowserRouter([
     {
@@ -27,6 +29,10 @@ const router = createBrowserRouter([
             {
                 path: 'card/:id',
                 element: <CardDetailPage />
+            },
+            {
+                path: 'settings',
+                element: <Settings />
             }
         ]
     }
@@ -34,8 +40,8 @@ const router = createBrowserRouter([
 
 function App() {
     const dispatch = useDispatch();
-
     useEffect(() => {
+        dispatch(setFromLocalStorage());
         dispatch(loadCards());
     }, [dispatch]);
 
