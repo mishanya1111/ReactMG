@@ -18,7 +18,7 @@ export const store = configureStore({
         counter: cardArraySlice,
         authentication: authenticationSlice
     },
-  middleware: getDefaultMiddleware =>
+    middleware: getDefaultMiddleware =>
         getDefaultMiddleware().concat(thunk, actionLogger)
 
 });
